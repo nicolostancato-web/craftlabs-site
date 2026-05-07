@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Analisi Dati & Insights — Craftlabs</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css">
+<style>
+  .service-hero { position: relative; min-height: 100vh; padding: 140px 48px 80px; display: flex; align-items: center; overflow: hidden; }
+  .service-hero-bg { position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 0%, rgba(255,200,94,0.15) 0%, transparent 50%), radial-gradient(ellipse at 0% 100%, rgba(94,255,164,0.1) 0%, transparent 50%), linear-gradient(180deg, #0a0a0f 0%, #1a1a0f 100%); z-index: -1; }
+  .service-content { max-width: 1400px; margin: 0 auto; width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+  @media (max-width: 900px) { .service-content { grid-template-columns: 1fr; } }
+  .service-intro h1 { font-size: clamp(40px, 5.5vw, 80px); font-weight: 800; line-height: 1; letter-spacing: -0.04em; margin: 16px 0 24px; }
+  .service-intro p { font-size: clamp(16px, 1.4vw, 19px); color: rgba(232,232,237,0.7); line-height: 1.7; margin-bottom: 32px; }
+
+  /* Dashboard animation */
+  .dashboard-viz { background: #0d0e1a; border-radius: 24px; border: 1px solid rgba(255,255,255,0.08); padding: 28px; }
+  .dash-header { display: flex; justify-content: space-between; margin-bottom: 24px; }
+  .dash-title { font-size: 13px; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 1.5px; }
+  .dash-status { display: flex; align-items: center; gap: 6px; font-size: 12px; color: #5effa0; }
+  .dash-status::before { content: ''; width: 8px; height: 8px; border-radius: 50%; background: #5effa0; box-shadow: 0 0 8px #5effa0; animation: blink 2s infinite; }
+  @keyframes blink { 50% { opacity: 0.3; } }
+
+  .kpi-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 24px; }
+  .kpi-box { background: rgba(255,255,255,0.03); padding: 16px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.05); }
+  .kpi-label { font-size: 11px; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; }
+  .kpi-value { font-size: 24px; font-weight: 700; color: white; }
+  .kpi-trend { font-size: 11px; color: #5effa0; margin-top: 4px; }
+
+  /* Animated chart */
+  .chart-wrap { background: rgba(255,255,255,0.02); border-radius: 12px; padding: 16px; }
+  .chart-title { font-size: 13px; color: rgba(255,255,255,0.7); margin-bottom: 12px; font-weight: 500; }
+  .chart svg { width: 100%; height: 180px; }
+  .chart-line { fill: none; stroke: url(#chartGrad); stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 1000; stroke-dashoffset: 1000; animation: drawLine 3s ease forwards; }
+  @keyframes drawLine { to { stroke-dashoffset: 0; } }
+  .chart-area { fill: url(#areaGrad); opacity: 0.3; }
+  .chart-dot { fill: #ffc85e; opacity: 0; animation: showDot 0.5s forwards; }
+  @keyframes showDot { to { opacity: 1; } }
+
+  .features-section { padding: 120px 48px; background: #050508; }
+  .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 32px; margin-top: 64px; }
+  .feature-card { padding: 40px 32px; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); border-radius: 20px; transition: all 0.3s; }
+  .feature-card:hover { background: rgba(255,200,94,0.05); border-color: rgba(255,200,94,0.3); transform: translateY(-4px); }
+  .feature-icon { width: 56px; height: 56px; background: linear-gradient(135deg, #ffc85e, #ff8a3c); border-radius: 16px; display: flex; align-items: center; justify-content: center; margin-bottom: 24px; font-size: 28px; }
+  .feature-card h3 { font-size: 22px; font-weight: 700; margin-bottom: 12px; }
+  .feature-card p { color: rgba(232,232,237,0.65); font-size: 15px; line-height: 1.6; }
+  .cta-section { padding: 120px 48px; background: linear-gradient(135deg, #1a0f0a 0%, #0a0a0f 100%); text-align: center; }
+  .back-link { display: inline-flex; gap: 8px; color: rgba(232,232,237,0.6); font-size: 14px; margin-bottom: 24px; }
+  .back-link:hover { color: white; }
+</style>
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="../index.html" class="logo">CRAFTLABS<span class="dot">.</span></a>
+      <ul class="nav-links">
+        <li><a href="../index.html#servizi">Servizi</a></li>
+        <li><a href="../index.html#processi">Processi</a></li>
+        <li><a href="../index.html#about">Chi siamo</a></li>
+        <li><a href="../index.html#contact" class="nav-cta">Contattaci</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <section class="service-hero">
+    <div class="service-hero-bg"></div>
+    <div class="service-content">
+      <div class="service-intro">
+        <a href="../index.html#servizi" class="back-link">← Torna ai servizi</a>
+        <span class="eyebrow">Analisi Dati</span>
+        <h1>Numeri che<br><span class="gradient-text">decidono</span> per te.</h1>
+        <p>Trasformiamo i tuoi dati grezzi in insight giornalieri, dashboard interattive e analisi predittive. Saprai esattamente quali clienti contattare, dove tagliare costi, quali servizi spingere — basato su dati, non su intuizioni.</p>
+        <a href="../index.html#contact" class="btn btn-primary">Richiedi un'analisi gratuita</a>
+      </div>
+
+      <div class="dashboard-viz">
+        <div class="dash-header">
+          <span class="dash-title">Performance · Ultimi 7 giorni</span>
+          <span class="dash-status">Live</span>
+        </div>
+
+        <div class="kpi-row">
+          <div class="kpi-box">
+            <div class="kpi-label">Lead</div>
+            <div class="kpi-value">247</div>
+            <div class="kpi-trend">↑ 12.4%</div>
+          </div>
+          <div class="kpi-box">
+            <div class="kpi-label">Preventivi</div>
+            <div class="kpi-value">89</div>
+            <div class="kpi-trend">↑ 23.1%</div>
+          </div>
+          <div class="kpi-box">
+            <div class="kpi-label">Conversion</div>
+            <div class="kpi-value">36%</div>
+            <div class="kpi-trend">↑ 5.2%</div>
+          </div>
+        </div>
+
+        <div class="chart-wrap">
+          <div class="chart-title">Richieste preventivo</div>
+          <div class="chart">
+            <svg viewBox="0 0 400 180" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="chartGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stop-color="#ffc85e"/>
+                  <stop offset="100%" stop-color="#ff5ec8"/>
+                </linearGradient>
+                <linearGradient id="areaGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%" stop-color="#ffc85e" stop-opacity="0.5"/>
+                  <stop offset="100%" stop-color="#ffc85e" stop-opacity="0"/>
+                </linearGradient>
+              </defs>
+              <path class="chart-area" d="M 20 140 L 80 110 L 140 95 L 200 80 L 260 70 L 320 55 L 380 30 L 380 160 L 20 160 Z"/>
+              <polyline class="chart-line" points="20,140 80,110 140,95 200,80 260,70 320,55 380,30"/>
+              <circle class="chart-dot" cx="20" cy="140" r="4" style="animation-delay: 1s"/>
+              <circle class="chart-dot" cx="80" cy="110" r="4" style="animation-delay: 1.3s"/>
+              <circle class="chart-dot" cx="140" cy="95" r="4" style="animation-delay: 1.6s"/>
+              <circle class="chart-dot" cx="200" cy="80" r="4" style="animation-delay: 1.9s"/>
+              <circle class="chart-dot" cx="260" cy="70" r="4" style="animation-delay: 2.2s"/>
+              <circle class="chart-dot" cx="320" cy="55" r="4" style="animation-delay: 2.5s"/>
+              <circle class="chart-dot" cx="380" cy="30" r="4" style="animation-delay: 2.8s"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="features-section">
+    <div class="container">
+      <span class="eyebrow">Cosa otteniamo</span>
+      <h2 class="section-title">Dati grezzi → decisioni.</h2>
+      <div class="features-grid">
+        <div class="feature-card"><div class="feature-icon">📊</div><h3>Dashboard live</h3><p>Metriche in tempo reale, drill-down per cliente, periodo, servizio. Accessibili da mobile.</p></div>
+        <div class="feature-card"><div class="feature-icon">📧</div><h3>Report giornalieri</h3><p>Email alle 8:00 con i numeri chiave del giorno prima. Tutto in 30 secondi di lettura.</p></div>
+        <div class="feature-card"><div class="feature-icon">🔮</div><h3>Predizioni AI</h3><p>Quali clienti stanno per andarsene, quali prodotti fanno boom, dove tagliare costi.</p></div>
+        <div class="feature-card"><div class="feature-icon">🎯</div><h3>Segmentazione</h3><p>Cluster automatici dei clienti per comportamento, valore, frequenza. Ottimizza la strategia.</p></div>
+        <div class="feature-card"><div class="feature-icon">🚨</div><h3>Alert intelligenti</h3><p>Notifiche su anomalie: calo vendite, aumento reclami, opportunità da cogliere subito.</p></div>
+        <div class="feature-card"><div class="feature-icon">📈</div><h3>Trend analysis</h3><p>Confronti settimanali, mensili, anno su anno. Stagionalità, picchi, pattern nascosti.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-section">
+    <div class="container container-narrow">
+      <h2 class="section-title">Quanto valgono<br>i tuoi dati oggi?</h2>
+      <p class="big-text" style="margin: 0 auto 48px;">Audit gratuito di 30 minuti. Ti diciamo cosa stai sprecando.</p>
+      <a href="../index.html#contact" class="btn btn-primary btn-large">Richiedi audit →</a>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container"><div class="footer-inner">
+      <a href="../index.html" class="logo">CRAFTLABS<span class="dot">.</span></a>
+      <span class="footer-meta">© 2026 Craftlabs · Made in Italy · info@craftlabs.it</span>
+    </div></div>
+  </footer>
+
+</body>
+</html>

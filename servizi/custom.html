@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Progetti Custom — Craftlabs</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css">
+<style>
+  .service-hero { position: relative; min-height: 100vh; padding: 140px 48px 80px; display: flex; align-items: center; overflow: hidden; }
+  .service-hero-bg { position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 50%, rgba(94,200,255,0.18) 0%, transparent 60%), linear-gradient(180deg, #0a0a0f 0%, #0a1a25 100%); z-index: -1; }
+  .service-content { max-width: 1400px; margin: 0 auto; width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+  @media (max-width: 900px) { .service-content { grid-template-columns: 1fr; } }
+  .service-intro h1 { font-size: clamp(40px, 5.5vw, 80px); font-weight: 800; line-height: 1; letter-spacing: -0.04em; margin: 16px 0 24px; }
+  .service-intro p { font-size: clamp(16px, 1.4vw, 19px); color: rgba(232,232,237,0.7); line-height: 1.7; margin-bottom: 32px; }
+
+  /* Floating blocks animation */
+  .blocks-viz { position: relative; height: 540px; perspective: 1200px; }
+  .block { position: absolute; background: linear-gradient(135deg, rgba(94,200,255,0.12), rgba(150,94,255,0.08)); border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; padding: 16px; backdrop-filter: blur(10px); }
+  .block::before { content: ''; position: absolute; top: 12px; right: 12px; width: 8px; height: 8px; border-radius: 50%; background: #5ec8ff; box-shadow: 0 0 8px #5ec8ff; }
+  .block-label { font-size: 11px; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+  .block-title { font-size: 14px; font-weight: 600; }
+  .block-1 { top: 40px; left: 0; width: 200px; animation: floatA 8s ease-in-out infinite; }
+  .block-2 { top: 120px; right: 0; width: 220px; animation: floatA 8s ease-in-out 1s infinite; }
+  .block-3 { top: 240px; left: 60px; width: 180px; animation: floatA 8s ease-in-out 2s infinite; }
+  .block-4 { top: 320px; right: 40px; width: 200px; animation: floatA 8s ease-in-out 3s infinite; }
+  .block-5 { top: 420px; left: 20px; width: 220px; animation: floatA 8s ease-in-out 4s infinite; }
+  @keyframes floatA { 0%, 100% { transform: translateY(0) rotateY(-5deg); } 50% { transform: translateY(-15px) rotateY(-5deg); } }
+
+  /* Connecting lines */
+  .blocks-viz::before { content: ''; position: absolute; inset: 0; background-image: radial-gradient(circle at center, rgba(94,200,255,0.05) 1px, transparent 1px); background-size: 30px 30px; opacity: 0.5; }
+
+  .features-section { padding: 120px 48px; background: #050508; }
+  .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 32px; margin-top: 64px; }
+  .feature-card { padding: 40px 32px; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); border-radius: 20px; transition: all 0.3s; }
+  .feature-card:hover { background: rgba(94,200,255,0.05); border-color: rgba(94,200,255,0.3); transform: translateY(-4px); }
+  .feature-icon { width: 56px; height: 56px; background: linear-gradient(135deg, #5ec8ff, #965eff); border-radius: 16px; display: flex; align-items: center; justify-content: center; margin-bottom: 24px; font-size: 28px; }
+  .feature-card h3 { font-size: 22px; font-weight: 700; margin-bottom: 12px; }
+  .feature-card p { color: rgba(232,232,237,0.65); font-size: 15px; line-height: 1.6; }
+
+  .timeline-section { padding: 120px 48px; }
+  .timeline-row { display: grid; grid-template-columns: 200px 1fr; gap: 48px; padding: 40px 0; border-top: 1px solid rgba(255,255,255,0.08); }
+  @media (max-width: 768px) { .timeline-row { grid-template-columns: 1fr; gap: 16px; } }
+  .timeline-week { font-size: 14px; color: rgba(94,200,255,0.8); font-weight: 600; letter-spacing: 1px; text-transform: uppercase; }
+  .timeline-content h3 { font-size: 28px; font-weight: 700; margin-bottom: 12px; }
+  .timeline-content p { color: rgba(232,232,237,0.65); font-size: 16px; line-height: 1.7; }
+
+  .cta-section { padding: 120px 48px; background: linear-gradient(135deg, #0a1a25 0%, #0a0a0f 100%); text-align: center; }
+  .back-link { display: inline-flex; gap: 8px; color: rgba(232,232,237,0.6); font-size: 14px; margin-bottom: 24px; }
+  .back-link:hover { color: white; }
+</style>
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="../index.html" class="logo">CRAFTLABS<span class="dot">.</span></a>
+      <ul class="nav-links">
+        <li><a href="../index.html#servizi">Servizi</a></li>
+        <li><a href="../index.html#processi">Processi</a></li>
+        <li><a href="../index.html#about">Chi siamo</a></li>
+        <li><a href="../index.html#contact" class="nav-cta">Contattaci</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <section class="service-hero">
+    <div class="service-hero-bg"></div>
+    <div class="service-content">
+      <div class="service-intro">
+        <a href="../index.html#servizi" class="back-link">← Torna ai servizi</a>
+        <span class="eyebrow">Su misura</span>
+        <h1>Hai un'idea diversa?<br><span class="gradient-text">La costruiamo</span>.</h1>
+        <p>Ogni azienda ha problemi unici. Costruiamo soluzioni AI personalizzate dal nulla — agenti specializzati, integrazioni custom, automazioni complesse. Tu descrivi il problema, noi creiamo lo strumento esatto che ti serve.</p>
+        <a href="../index.html#contact" class="btn btn-primary">Raccontaci la tua idea</a>
+      </div>
+
+      <div class="blocks-viz">
+        <div class="block block-1">
+          <div class="block-label">Step 1</div>
+          <div class="block-title">Ascoltiamo il problema</div>
+        </div>
+        <div class="block block-2">
+          <div class="block-label">Step 2</div>
+          <div class="block-title">Disegniamo la soluzione</div>
+        </div>
+        <div class="block block-3">
+          <div class="block-label">Step 3</div>
+          <div class="block-title">Prototipo in 2 settimane</div>
+        </div>
+        <div class="block block-4">
+          <div class="block-label">Step 4</div>
+          <div class="block-title">Test sul campo</div>
+        </div>
+        <div class="block block-5">
+          <div class="block-label">Step 5</div>
+          <div class="block-title">Deploy e formazione</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="features-section">
+    <div class="container">
+      <span class="eyebrow">Cosa abbiamo costruito</span>
+      <h2 class="section-title">Casi reali, soluzioni vere.</h2>
+      <div class="features-grid">
+        <div class="feature-card"><div class="feature-icon">🏗️</div><h3>Estrattore SCIA edilizia</h3><p>Bot che legge SCIA dai comuni italiani, estrae imprese edili con permessi attivi, costruisce database leads.</p></div>
+        <div class="feature-card"><div class="feature-icon">📜</div><h3>Analisi contratti</h3><p>AI che legge contratti complessi, estrae clausole critiche, segnala rischi nascosti. Per studi legali e PMI.</p></div>
+        <div class="feature-card"><div class="feature-icon">🔍</div><h3>Audit fiscale</h3><p>Sistema che analizza fatture, individua anomalie, verifica conformità. Per commercialisti.</p></div>
+        <div class="feature-card"><div class="feature-icon">📦</div><h3>Gestione magazzino</h3><p>Bot WhatsApp per registrare entrate e uscite, leggere codici, aggiornare stock in tempo reale.</p></div>
+        <div class="feature-card"><div class="feature-icon">🎯</div><h3>Lead scoring AI</h3><p>Modello che predice quali lead convertono, prioritizza il team commerciale, aumenta close rate.</p></div>
+        <div class="feature-card"><div class="feature-icon">🌍</div><h3>Multi-tenant SaaS</h3><p>Piattaforme white-label che vendi ai tuoi clienti finali. Tu intaschi, noi gestiamo l'infrastruttura.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="timeline-section">
+    <div class="container">
+      <span class="eyebrow">Il processo</span>
+      <h2 class="section-title">Da idea a produzione.<br>3 settimane esatte.</h2>
+
+      <div style="margin-top: 64px;">
+        <div class="timeline-row">
+          <div class="timeline-week">Settimana 1</div>
+          <div class="timeline-content">
+            <h3>Discovery profonda</h3>
+            <p>Una giornata sul tuo posto di lavoro, capire il problema dal vivo. Non slide: vediamo come lavorate, dove perdete tempo, dove l'AI può davvero aiutare.</p>
+          </div>
+        </div>
+        <div class="timeline-row">
+          <div class="timeline-week">Settimana 2</div>
+          <div class="timeline-content">
+            <h3>Prototipo funzionante</h3>
+            <p>Costruiamo una versione MVP usando i tuoi dati reali. Tu la testi, noi iteriamo. Niente vaporware — qualcosa che funziona davvero.</p>
+          </div>
+        </div>
+        <div class="timeline-row">
+          <div class="timeline-week">Settimana 3</div>
+          <div class="timeline-content">
+            <h3>Deploy + formazione</h3>
+            <p>Pubblichiamo sui server, alleniamo il team, monitoriamo le prime due settimane di uso reale. Sei autonomo dal giorno 1.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-section">
+    <div class="container container-narrow">
+      <h2 class="section-title">Hai un'idea<br>che nessun software risolve?</h2>
+      <p class="big-text" style="margin: 0 auto 48px;">Raccontacela. Capiamo se è fattibile e quanto costa, gratis e senza impegno.</p>
+      <a href="../index.html#contact" class="btn btn-primary btn-large">Parliamone →</a>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container"><div class="footer-inner">
+      <a href="../index.html" class="logo">CRAFTLABS<span class="dot">.</span></a>
+      <span class="footer-meta">© 2026 Craftlabs · Made in Italy · info@craftlabs.it</span>
+    </div></div>
+  </footer>
+
+</body>
+</html>

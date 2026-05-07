@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Automazione AI — Craftlabs</title>
+<meta name="description" content="Automatizza i processi della tua azienda con flussi AI che lavorano 24/7. Bot, agenti, integrazioni intelligenti.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css">
+<style>
+  .service-hero {
+    position: relative;
+    min-height: 100vh;
+    padding: 140px 48px 80px;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+  }
+  .service-hero-bg {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse at 80% 20%, rgba(94,124,255,0.18) 0%, transparent 50%),
+      radial-gradient(ellipse at 20% 80%, rgba(255,94,200,0.12) 0%, transparent 50%),
+      linear-gradient(180deg, #0a0a0f 0%, #0f1428 100%);
+    z-index: -1;
+  }
+  .service-content { max-width: 1400px; margin: 0 auto; width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+  @media (max-width: 900px) { .service-content { grid-template-columns: 1fr; } }
+
+  .service-intro h1 {
+    font-size: clamp(40px, 5.5vw, 80px);
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -0.04em;
+    margin: 16px 0 24px;
+  }
+  .service-intro p { font-size: clamp(16px, 1.4vw, 19px); color: rgba(232,232,237,0.7); line-height: 1.7; margin-bottom: 32px; }
+
+  /* ───────── ANIMAZIONE FLUSSO NEURALE ───────── */
+  .flow-viz {
+    position: relative;
+    height: 500px;
+    background: linear-gradient(135deg, rgba(94,124,255,0.06), rgba(255,94,200,0.04));
+    border-radius: 24px;
+    border: 1px solid rgba(255,255,255,0.08);
+    overflow: hidden;
+  }
+  .flow-svg { width: 100%; height: 100%; }
+
+  .flow-node {
+    fill: #1a1f3d;
+    stroke: rgba(255,255,255,0.15);
+    stroke-width: 1.5;
+    transition: all 0.3s;
+  }
+  .flow-node-glow {
+    fill: url(#nodeGradient);
+    filter: drop-shadow(0 0 12px rgba(94,124,255,0.6));
+    animation: pulse 3s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { filter: drop-shadow(0 0 12px rgba(94,124,255,0.6)); }
+    50% { filter: drop-shadow(0 0 24px rgba(94,124,255,1)); }
+  }
+  .flow-line {
+    fill: none;
+    stroke: rgba(94,124,255,0.3);
+    stroke-width: 2;
+    stroke-dasharray: 6 6;
+    animation: dash 2s linear infinite;
+  }
+  @keyframes dash { to { stroke-dashoffset: -24; } }
+
+  .flow-particle {
+    fill: #5e7cff;
+    filter: drop-shadow(0 0 8px #5e7cff);
+  }
+  .flow-particle-2 { fill: #ff5ec8; filter: drop-shadow(0 0 8px #ff5ec8); }
+  .flow-particle-3 { fill: #5effa0; filter: drop-shadow(0 0 8px #5effa0); }
+
+  .flow-label {
+    fill: rgba(255,255,255,0.85);
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    text-anchor: middle;
+  }
+  .flow-sublabel { font-size: 10px; fill: rgba(255,255,255,0.45); font-weight: 400; }
+
+  /* ───────── FEATURES ───────── */
+  .features-section { padding: 120px 48px; background: #050508; }
+  .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 32px; margin-top: 64px; }
+  .feature-card {
+    padding: 40px 32px;
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 20px;
+    transition: all 0.3s;
+  }
+  .feature-card:hover {
+    background: rgba(94,124,255,0.05);
+    border-color: rgba(94,124,255,0.3);
+    transform: translateY(-4px);
+  }
+  .feature-icon {
+    width: 56px; height: 56px;
+    background: linear-gradient(135deg, #5e7cff, #ff5ec8);
+    border-radius: 16px;
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 24px;
+    font-size: 28px; color: white; font-weight: bold;
+  }
+  .feature-card h3 { font-size: 22px; font-weight: 700; margin-bottom: 12px; letter-spacing: -0.02em; }
+  .feature-card p { color: rgba(232,232,237,0.65); font-size: 15px; line-height: 1.6; }
+
+  /* ───────── USE CASES ───────── */
+  .usecases-section { padding: 120px 48px; }
+  .usecase-row {
+    display: grid; grid-template-columns: 200px 1fr; gap: 48px;
+    padding: 40px 0; border-top: 1px solid rgba(255,255,255,0.08);
+  }
+  @media (max-width: 768px) { .usecase-row { grid-template-columns: 1fr; gap: 16px; } }
+  .usecase-num { font-size: 80px; font-weight: 800; background: linear-gradient(135deg, #5e7cff, #ff5ec8); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; line-height: 1; }
+  .usecase-content h3 { font-size: 28px; font-weight: 700; margin-bottom: 12px; letter-spacing: -0.02em; }
+  .usecase-content p { color: rgba(232,232,237,0.65); font-size: 16px; line-height: 1.7; }
+
+  /* ───────── CTA ───────── */
+  .cta-section { padding: 120px 48px; background: linear-gradient(135deg, #1a0f3d 0%, #0a0a0f 100%); text-align: center; }
+  .back-link {
+    display: inline-flex; align-items: center; gap: 8px;
+    color: rgba(232,232,237,0.6); font-size: 14px; font-weight: 500;
+    margin-bottom: 24px; transition: color 0.2s;
+  }
+  .back-link:hover { color: white; }
+</style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="../index.html" class="logo">CRAFTLABS<span class="dot">.</span></a>
+      <ul class="nav-links">
+        <li><a href="../index.html#servizi">Servizi</a></li>
+        <li><a href="../index.html#processi">Processi</a></li>
+        <li><a href="../index.html#about">Chi siamo</a></li>
+        <li><a href="../index.html#contact" class="nav-cta">Contattaci</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="service-hero">
+    <div class="service-hero-bg"></div>
+    <div class="service-content">
+      <div class="service-intro">
+        <a href="../index.html#servizi" class="back-link">← Torna ai servizi</a>
+        <span class="eyebrow">Automazione AI</span>
+        <h1>Processi che<br><span class="gradient-text">pensano da soli</span>.</h1>
+        <p>Costruiamo flussi automatizzati che gestiscono richieste, generano documenti, comunicano con i clienti e aggiornano i tuoi sistemi — senza intervento umano. Il tuo team si concentra sul valore, l'AI fa il resto.</p>
+        <a href="../index.html#contact" class="btn btn-primary">Richiedi un'analisi gratuita</a>
+      </div>
+
+      <!-- Visualizzazione neurale animata -->
+      <div class="flow-viz">
+        <svg class="flow-svg" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <radialGradient id="nodeGradient" cx="0.5" cy="0.5" r="0.5">
+              <stop offset="0%" stop-color="#7e9cff"/>
+              <stop offset="100%" stop-color="#3a5cdf"/>
+            </radialGradient>
+            <linearGradient id="lineGradient">
+              <stop offset="0%" stop-color="#5e7cff" stop-opacity="0"/>
+              <stop offset="50%" stop-color="#5e7cff" stop-opacity="0.8"/>
+              <stop offset="100%" stop-color="#ff5ec8" stop-opacity="0"/>
+            </linearGradient>
+          </defs>
+
+          <!-- Linee di connessione -->
+          <path class="flow-line" d="M 80 250 Q 175 100, 250 180" />
+          <path class="flow-line" d="M 80 250 Q 175 250, 250 250" />
+          <path class="flow-line" d="M 80 250 Q 175 400, 250 320" />
+          <path class="flow-line" d="M 250 180 L 410 220" />
+          <path class="flow-line" d="M 250 250 L 410 250" />
+          <path class="flow-line" d="M 250 320 L 410 280" />
+
+          <!-- Particelle in movimento -->
+          <circle r="4" class="flow-particle">
+            <animateMotion dur="3s" repeatCount="indefinite" path="M 80 250 Q 175 100, 250 180 L 410 220" />
+          </circle>
+          <circle r="4" class="flow-particle-2">
+            <animateMotion dur="3.5s" repeatCount="indefinite" begin="1s" path="M 80 250 Q 175 250, 250 250 L 410 250" />
+          </circle>
+          <circle r="4" class="flow-particle-3">
+            <animateMotion dur="4s" repeatCount="indefinite" begin="2s" path="M 80 250 Q 175 400, 250 320 L 410 280" />
+          </circle>
+
+          <!-- Nodi -->
+          <g>
+            <circle cx="80" cy="250" r="32" class="flow-node-glow"/>
+            <text x="80" y="255" class="flow-label">Cliente</text>
+            <text x="80" y="295" class="flow-label flow-sublabel">WhatsApp / Email</text>
+          </g>
+
+          <g>
+            <circle cx="250" cy="180" r="26" class="flow-node"/>
+            <text x="250" y="184" class="flow-label">AI</text>
+            <text x="250" y="225" class="flow-label flow-sublabel">Capisce richiesta</text>
+          </g>
+
+          <g>
+            <circle cx="250" cy="250" r="26" class="flow-node"/>
+            <text x="250" y="254" class="flow-label">DB</text>
+            <text x="250" y="290" class="flow-label flow-sublabel">Salva / verifica</text>
+          </g>
+
+          <g>
+            <circle cx="250" cy="320" r="26" class="flow-node"/>
+            <text x="250" y="324" class="flow-label">PDF</text>
+            <text x="250" y="360" class="flow-label flow-sublabel">Genera documento</text>
+          </g>
+
+          <g>
+            <circle cx="410" cy="250" r="32" class="flow-node-glow"/>
+            <text x="410" y="255" class="flow-label">Risposta</text>
+            <text x="410" y="295" class="flow-label flow-sublabel">Email + WhatsApp</text>
+          </g>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="features-section">
+    <div class="container">
+      <span class="eyebrow">Cosa automatizziamo</span>
+      <h2 class="section-title">Tutto ciò che è ripetitivo,<br>standardizzato e regolare.</h2>
+
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">⚡</div>
+          <h3>Preventivi automatici</h3>
+          <p>Cliente scrive → bot raccoglie info → genera PDF brandizzato → invia via email. Tutto in 30 secondi.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🔁</div>
+          <h3>Workflow integrazioni</h3>
+          <p>Collega CRM, fatturazione, gestionali, calendari. I dati fluiscono senza copia-incolla manuale.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">📨</div>
+          <h3>Risposte intelligenti</h3>
+          <p>L'AI risponde automaticamente alle domande frequenti, smista i casi complessi al team giusto.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">📅</div>
+          <h3>Schedulazioni</h3>
+          <p>Job ricorrenti, report automatici, sync notturni. Lavorano mentre tu dormi.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🤖</div>
+          <h3>Agenti su misura</h3>
+          <p>Costruiamo agenti AI verticali per il tuo dominio: legale, sanità, edilizia, retail.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">📊</div>
+          <h3>Monitoraggio continuo</h3>
+          <p>Dashboard in tempo reale, alert su eventi critici, log completo di ogni azione automatica.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- USE CASES -->
+  <section class="usecases-section">
+    <div class="container">
+      <span class="eyebrow">Esempi reali</span>
+      <h2 class="section-title">Tre casi d'uso<br>che generano ROI dal primo mese.</h2>
+
+      <div style="margin-top: 64px;">
+        <div class="usecase-row">
+          <div class="usecase-num">01</div>
+          <div class="usecase-content">
+            <h3>Bot Preventivi WhatsApp</h3>
+            <p>Per aziende che ricevono richieste continue. Il bot raccoglie nome, indirizzo, dettagli del lavoro, calcola il prezzo dal listino e manda il PDF. In 24h dimezzi il tempo del back office. Vedi il caso reale di MTT Ambiente — preventivi spurgo automatici 24/7.</p>
+          </div>
+        </div>
+        <div class="usecase-row">
+          <div class="usecase-num">02</div>
+          <div class="usecase-content">
+            <h3>Lead Generation Automatica</h3>
+            <p>Estraiamo aziende target dai database pubblici (P.IVA, ATECO), arricchiamo con telefono, email, sito web, fatturato. Il sistema costruisce un CSV pronto per cold email — 700+ contatti qualificati in un weekend.</p>
+          </div>
+        </div>
+        <div class="usecase-row">
+          <div class="usecase-num">03</div>
+          <div class="usecase-content">
+            <h3>Estrazione documenti</h3>
+            <p>Caricli i PDF (fatture, contratti, perizie) e l'AI estrae automaticamente i dati strutturati. Pronti per essere importati nel tuo gestionale o CRM. Niente più data entry manuale.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <div class="container container-narrow">
+      <h2 class="section-title">Pronto a togliere lavoro<br>al tuo team?</h2>
+      <p class="big-text" style="margin: 0 auto 48px;">Prima call gratuita. Capiamo se l'automazione fa al caso tuo, senza impegno.</p>
+      <a href="../index.html#contact" class="btn btn-primary btn-large">Prenota una call →</a>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <a href="../index.html" class="logo">CRAFTLABS<span class="dot">.</span></a>
+        <span class="footer-meta">© 2026 Craftlabs · Made in Italy · info@craftlabs.it</span>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

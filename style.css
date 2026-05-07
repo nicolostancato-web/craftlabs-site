@@ -329,3 +329,14 @@ img { max-width: 100%; display: block; }
   .footer { padding: 32px 24px; }
   .footer-inner { flex-direction: column; gap: 16px; text-align: center; }
 }
+
+/* ─── CARD CLICKABLE ────────────────────────────────────────── */
+.work-card-link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+.work-card-link:hover .work-link {
+  color: #ff7a3c;
+  letter-spacing: 0.5px;
+}
