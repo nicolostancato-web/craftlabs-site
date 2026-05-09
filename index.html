@@ -3,191 +3,392 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Craftlabs — AI & Digital Solutions per le PMI Italiane</title>
-<meta name="description" content="Craftlabs aiuta le piccole e medie imprese italiane a crescere con soluzioni AI, automazioni intelligenti, analisi dati e siti web professionali.">
+<title>Craftlabs — Agenti AI per le PMI italiane</title>
+<meta name="description" content="Craftlabs costruisce agenti AI che gestiscono email, WhatsApp e telefonate per le piccole e medie imprese. Lavorano 24/7 in italiano.">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='g' x1='0' x2='1'><stop offset='0' stop-color='%23ff5733'/><stop offset='1' stop-color='%23e63946'/></linearGradient></defs><rect width='100' height='100' rx='22' fill='%230a0a0a'/><path d='M72 28 Q40 28 40 50 Q40 72 72 72' stroke='url(%23g)' stroke-width='12' fill='none' stroke-linecap='round'/></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <!-- NAV -->
-  <nav class="nav">
-    <div class="nav-inner">
-      <a href="#" class="logo">CRAFTLABS<span class="dot">.</span></a>
-      <ul class="nav-links">
-        <li><a href="#servizi">Servizi</a></li>
-        <li><a href="#processi">Processi</a></li>
-        <li><a href="#about">Chi siamo</a></li>
-        <li><a href="#contact" class="nav-cta">Contattaci</a></li>
-      </ul>
-    </div>
-  </nav>
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <linearGradient id="logoGrad" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#ff5733"/>
+      <stop offset="1" stop-color="#e63946"/>
+    </linearGradient>
+  </defs>
+</svg>
 
-  <!-- HERO -->
-  <section class="hero">
-    <div class="hero-bg"></div>
-    <div class="hero-overlay"></div>
-    <div class="hero-content">
-      <span class="eyebrow">AI · Automazione · Crescita Digitale</span>
-      <h1 class="hero-title">
-        Soluzioni intelligenti<br>
-        <span class="gradient-text">per chi fa impresa</span><br>
-        in Italia.
-      </h1>
-      <p class="hero-sub">
-        Aiutiamo piccole e medie imprese a ottimizzare processi, automatizzare attività ripetitive
-        e crescere grazie all'intelligenza artificiale. Strumenti su misura, costi accessibili,
-        risultati misurabili.
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="#" class="logo-wrap">
+      <svg class="logo-mark" viewBox="0 0 100 100" aria-hidden="true">
+        <rect width="100" height="100" rx="22" fill="#0a0a0a"/>
+        <path d="M72 28 Q40 28 40 50 Q40 72 72 72" stroke="url(#logoGrad)" stroke-width="12" fill="none" stroke-linecap="round"/>
+      </svg>
+      <span class="logo-text">CRAFTLABS</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#agente">Agente AI</a></li>
+      <li><a href="#siti">Siti web</a></li>
+      <li><a href="#custom">Custom</a></li>
+      <li><a href="#contatti" class="nav-cta">Prenota chiamata</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-orb"></div>
+  <div class="hero-inner">
+    <div class="hero-badge">
+      <span class="dot-pulse"></span>
+      <span>Live in italiano · 24/7</span>
+    </div>
+    <h1 class="hero-title">
+      I tuoi processi.<br>
+      <span class="grad-text">Automatizzati.</span>
+    </h1>
+    <p class="hero-sub">
+      Costruiamo agenti AI che gestiscono <b>email</b>, <b>WhatsApp</b> e <b>telefonate</b><br>
+      per le piccole e medie imprese italiane. Niente errori. Niente ferie.
+    </p>
+    <div class="hero-ctas">
+      <a href="#contatti" class="btn-primary">Prenota una chiamata →</a>
+      <a href="#agente" class="btn-ghost">Scopri l'agente</a>
+    </div>
+
+    <div class="ticker">
+      <div class="ticker-track">
+        <span>WhatsApp</span><span>·</span>
+        <span>Gmail</span><span>·</span>
+        <span>Google Calendar</span><span>·</span>
+        <span>Database</span><span>·</span>
+        <span>Telefono</span><span>·</span>
+        <span>Notion</span><span>·</span>
+        <span>Slack</span><span>·</span>
+        <span>Stripe</span><span>·</span>
+        <span>Zapier</span><span>·</span>
+        <span>Drive</span><span>·</span>
+        <span>WhatsApp</span><span>·</span>
+        <span>Gmail</span><span>·</span>
+        <span>Google Calendar</span><span>·</span>
+        <span>Database</span><span>·</span>
+        <span>Telefono</span><span>·</span>
+        <span>Notion</span><span>·</span>
+        <span>Slack</span><span>·</span>
+        <span>Stripe</span><span>·</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODOTTO 1: AGENTE AI -->
+<section id="agente" class="product-light">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Prodotto 1 — Agente AI</span>
+      <h2>Il tuo collaboratore<br>che <span class="grad-text">non dorme mai</span>.</h2>
+      <p class="section-lead">
+        Risponde su WhatsApp, gestisce le email, parla al telefono.
+        Tutto in italiano. Tutto in tempo reale. Tutto come una persona vera.
       </p>
-      <div class="hero-actions">
-        <a href="#contact" class="btn btn-primary">Richiedi una consulenza</a>
-        <a href="#servizi" class="btn btn-ghost">Scopri cosa facciamo →</a>
+    </div>
+
+    <div class="agent-grid">
+
+      <!-- WHATSAPP MOCKUP -->
+      <div class="channel-card">
+        <div class="channel-head">
+          <div class="ch-icon ch-wa">
+            <svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967c-.273-.099-.471-.148-.67.15c-.197.297-.767.966-.94 1.164c-.173.199-.347.223-.644.075c-.297-.15-1.255-.463-2.39-1.475c-.883-.788-1.48-1.761-1.653-2.059c-.173-.297-.018-.458.13-.606c.134-.133.298-.347.446-.52c.149-.174.198-.298.298-.497c.099-.198.05-.371-.025-.52c-.075-.149-.669-1.612-.916-2.207c-.242-.579-.487-.5-.669-.51l-.57-.01c-.198 0-.52.074-.792.372c-.272.297-1.04 1.016-1.04 2.479c0 1.462 1.065 2.875 1.213 3.074c.149.198 2.096 3.2 5.077 4.487c.709.306 1.262.489 1.694.625c.712.227 1.36.195 1.871.118c.571-.085 1.758-.719 2.006-1.413c.248-.694.248-1.289.173-1.413c-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214l-3.741.982l.998-3.648l-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884c2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413"/></svg>
+          </div>
+          <div>
+            <div class="ch-title">WhatsApp</div>
+            <div class="ch-sub">Messaggi · 24/7</div>
+          </div>
+        </div>
+        <div class="phone">
+          <div class="phone-screen" id="waChat"></div>
+        </div>
+        <div class="ch-footer">
+          <span class="metric"><b>2 sec</b> risposta media</span>
+        </div>
+      </div>
+
+      <!-- EMAIL MOCKUP -->
+      <div class="channel-card">
+        <div class="channel-head">
+          <div class="ch-icon ch-em">
+            <svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2zm-2 0l-8 5l-8-5zm0 12H4V8l8 5l8-5z"/></svg>
+          </div>
+          <div>
+            <div class="ch-title">Email</div>
+            <div class="ch-sub">Lettura + risposta</div>
+          </div>
+        </div>
+        <div class="email-mock">
+          <div class="em-msg em-in">
+            <div class="em-from">Mario Rossi <span>· cliente</span></div>
+            <div class="em-body">Salve, vorrei un preventivo per servizi di pulizia uffici, 200 mq circa.</div>
+          </div>
+          <div class="em-msg em-out">
+            <div class="em-from">Agente <span>· in risposta</span></div>
+            <div class="em-body">
+              Buongiorno Sig. Rossi,<br>
+              grazie per averci contattato. Per preparare un preventivo accurato avrei bisogno di qualche informazione:
+              <ul>
+                <li>indirizzo dell'ufficio</li>
+                <li>frequenza desiderata</li>
+                <li>orari preferiti</li>
+              </ul>
+              In allegato il listino base.
+            </div>
+          </div>
+        </div>
+        <div class="ch-footer">
+          <span class="metric"><b>0 mail</b> dimenticate</span>
+        </div>
+      </div>
+
+      <!-- VOICE MOCKUP -->
+      <div class="channel-card">
+        <div class="channel-head">
+          <div class="ch-icon ch-vo">
+            <svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M20 15.5c-1.25 0-2.45-.2-3.57-.57a1 1 0 0 0-1.02.24l-2.2 2.2a15.05 15.05 0 0 1-6.59-6.58l2.2-2.21a.96.96 0 0 0 .25-1A11.36 11.36 0 0 1 8.5 4a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1c0 9.39 7.61 17 17 17a1 1 0 0 0 1-1v-3.5a1 1 0 0 0-1-1Z"/></svg>
+          </div>
+          <div>
+            <div class="ch-title">Voce</div>
+            <div class="ch-sub">Telefonate live</div>
+          </div>
+        </div>
+        <div class="voice-mock">
+          <div class="voice-visualizer">
+            <span></span><span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span><span></span><span></span>
+          </div>
+          <div class="voice-transcript">
+            <div class="vt-line vt-bot"><b>Agente:</b> Pronto, in cosa posso aiutarla?</div>
+            <div class="vt-line vt-user"><b>Cliente:</b> Vorrei prenotare un appuntamento per giovedì pomeriggio</div>
+            <div class="vt-line vt-bot"><b>Agente:</b> Ho disponibilità alle 15:00 oppure alle 16:30. Cosa preferisce?</div>
+          </div>
+        </div>
+        <div class="ch-footer">
+          <span class="metric"><b>100%</b> chiamate gestite</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Performance row -->
+    <div class="perf-row">
+      <div class="perf-cell">
+        <div class="perf-num">2 sec</div>
+        <div class="perf-lbl">Tempo medio risposta</div>
+      </div>
+      <div class="perf-cell">
+        <div class="perf-num">24/7</div>
+        <div class="perf-lbl">Sempre attivo</div>
+      </div>
+      <div class="perf-cell">
+        <div class="perf-num">∞</div>
+        <div class="perf-lbl">Conversazioni in parallelo</div>
+      </div>
+      <div class="perf-cell">
+        <div class="perf-num">3 sett.</div>
+        <div class="perf-lbl">Dal contatto al go-live</div>
       </div>
     </div>
-    <div class="scroll-hint">SCROLL TO EXPLORE</div>
-  </section>
 
-  <!-- SERVIZI -->
-  <section class="section section-dark" id="servizi">
-    <div class="container">
-      <span class="eyebrow">I nostri servizi</span>
-      <h2 class="section-title">Tecnologia che lavora<br>per il tuo business.</h2>
-
-      <div class="work-grid">
-        <a href="servizi/automazione.html" class="work-card-link">
-          <article class="work-card">
-            <div class="work-card-bg" style="background: linear-gradient(135deg, #0a0e27 0%, #1a1f4a 50%, #2d1b4e 100%);"></div>
-            <div class="work-card-content">
-              <span class="work-tag">Automazione AI</span>
-              <h3>Processi intelligenti</h3>
-              <p>Automatizziamo compiti ripetitivi come gestione richieste, generazione preventivi e risposte ai clienti. Il tuo team si concentra su ciò che conta.</p>
-              <span class="work-link">Approfondisci →</span>
-            </div>
-          </article>
-        </a>
-
-        <a href="servizi/messaggi.html" class="work-card-link">
-          <article class="work-card">
-            <div class="work-card-bg" style="background: linear-gradient(135deg, #1a0f3d 0%, #4a1f5a 50%, #1f3d4a 100%);"></div>
-            <div class="work-card-content">
-              <span class="work-tag">Comunicazione</span>
-              <h3>Messaggi & Email</h3>
-              <p>Sistemi automatici per gestire richieste via WhatsApp, email e telefono. Risposte rapide, professionali, sempre disponibili.</p>
-              <span class="work-link">Approfondisci →</span>
-            </div>
-          </article>
-        </a>
-
-        <a href="servizi/insights.html" class="work-card-link">
-          <article class="work-card">
-            <div class="work-card-bg" style="background: linear-gradient(135deg, #0f3d2e 0%, #1a4a3d 50%, #2d4a1f 100%);"></div>
-            <div class="work-card-content">
-              <span class="work-tag">Analisi Dati</span>
-              <h3>Insights ogni giorno</h3>
-              <p>Trasformiamo i tuoi dati in report quotidiani, dashboard e analisi predittive. Decisioni basate su numeri, non su sensazioni.</p>
-              <span class="work-link">Approfondisci →</span>
-            </div>
-          </article>
-        </a>
-
-        <a href="servizi/siti-web.html" class="work-card-link">
-          <article class="work-card">
-            <div class="work-card-bg" style="background: linear-gradient(135deg, #3d1a0f 0%, #5a2f1f 50%, #4a3d1f 100%);"></div>
-            <div class="work-card-content">
-              <span class="work-tag">Web Design</span>
-              <h3>Siti web professionali</h3>
-              <p>Realizziamo siti veloci, moderni e ottimizzati per Google. Dal sito vetrina all'e-commerce, costruiti per generare clienti.</p>
-              <span class="work-link">Approfondisci →</span>
-            </div>
-          </article>
-        </a>
-
-        <a href="servizi/crm.html" class="work-card-link">
-          <article class="work-card">
-            <div class="work-card-bg" style="background: linear-gradient(135deg, #1f0f3d 0%, #2f1f5a 50%, #3d1f4a 100%);"></div>
-            <div class="work-card-content">
-              <span class="work-tag">Database & CRM</span>
-              <h3>Gestione clienti</h3>
-              <p>Database personalizzati per gestire clienti, preventivi e contatti. Tutto centralizzato, accessibile, integrato con i tuoi strumenti.</p>
-              <span class="work-link">Approfondisci →</span>
-            </div>
-          </article>
-        </a>
-
-        <a href="servizi/custom.html" class="work-card-link">
-          <article class="work-card">
-            <div class="work-card-bg" style="background: linear-gradient(135deg, #0f2e3d 0%, #1f4a5a 50%, #1f3d4a 100%);"></div>
-            <div class="work-card-content">
-              <span class="work-tag">Su misura</span>
-              <h3>Progetti custom</h3>
-              <p>Hai un'idea o un problema specifico? Progettiamo e costruiamo soluzioni AI completamente personalizzate per la tua azienda.</p>
-              <span class="work-link">Parliamone →</span>
-            </div>
-          </article>
-        </a>
+    <!-- Integrazioni -->
+    <div class="integrations">
+      <h3>Connesso a tutto quello che usi.</h3>
+      <div class="int-grid">
+        <div class="int-pill">📱 WhatsApp</div>
+        <div class="int-pill">✉️ Gmail / Outlook</div>
+        <div class="int-pill">📅 Google Calendar</div>
+        <div class="int-pill">🗄️ Database aziendale</div>
+        <div class="int-pill">📞 Centralino</div>
+        <div class="int-pill">💬 Slack</div>
+        <div class="int-pill">📋 Notion / Airtable</div>
+        <div class="int-pill">💳 Stripe</div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- PROCESSI -->
-  <section class="section" id="processi">
-    <div class="container">
+<!-- PRODOTTO 2: SITI WEB -->
+<section id="siti" class="product-dark">
+  <div class="container">
+    <div class="section-head dark">
+      <span class="eyebrow">Prodotto 2 — Siti web</span>
+      <h2>Siti che <span class="grad-text">convertono</span>.<br>Pronti in 7 giorni.</h2>
+      <p class="section-lead dark">
+        Design moderno, copy che vende, ottimizzazione SEO.
+        Niente template generici da grafico anni 2010.
+      </p>
+    </div>
+
+    <div class="site-showcase">
+      <div class="laptop">
+        <div class="laptop-screen">
+          <div class="lp-bar">
+            <span class="lp-dot lp-r"></span>
+            <span class="lp-dot lp-y"></span>
+            <span class="lp-dot lp-g"></span>
+            <div class="lp-url">il-tuo-brand.it</div>
+          </div>
+          <div class="lp-content">
+            <div class="lp-hero-area">
+              <div class="lp-eyebrow">Il tuo settore · 2026</div>
+              <div class="lp-title">Il tuo brand,<br>raccontato bene.</div>
+              <div class="lp-cta">Inizia ora →</div>
+            </div>
+            <div class="lp-grid">
+              <div class="lp-card"></div>
+              <div class="lp-card"></div>
+              <div class="lp-card"></div>
+            </div>
+          </div>
+        </div>
+        <div class="laptop-base"></div>
+      </div>
+    </div>
+
+    <div class="site-features">
+      <div class="sf-cell">
+        <div class="sf-num">01</div>
+        <div class="sf-title">Design moderno</div>
+        <div class="sf-desc">Tipografia premium, animazioni fluide, mobile-first.</div>
+      </div>
+      <div class="sf-cell">
+        <div class="sf-num">02</div>
+        <div class="sf-title">Velocità reale</div>
+        <div class="sf-desc">Caricamento sotto 1 secondo. Hosting incluso.</div>
+      </div>
+      <div class="sf-cell">
+        <div class="sf-num">03</div>
+        <div class="sf-title">SEO + Analytics</div>
+        <div class="sf-desc">Ti trovano su Google. Sai chi visita e da dove.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODOTTO 3: CUSTOM -->
+<section id="custom" class="product-light">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Prodotto 3 — Soluzioni custom</span>
+      <h2>Hai un'idea?<br>La <span class="grad-text">realizziamo</span>.</h2>
+      <p class="section-lead">
+        Quando il tuo problema è troppo specifico per un prodotto standard,
+        costruiamo una soluzione su misura.
+      </p>
+    </div>
+
+    <div class="custom-grid">
+      <div class="cg-card">
+        <div class="cg-icon">📊</div>
+        <div class="cg-title">Dashboard su misura</div>
+        <div class="cg-desc">I tuoi numeri, dove li vuoi tu. Real-time, mobile, multi-utente.</div>
+      </div>
+      <div class="cg-card">
+        <div class="cg-icon">🔍</div>
+        <div class="cg-title">Analisi dati</div>
+        <div class="cg-desc">Trasformiamo Excel e database confusi in insight utilizzabili.</div>
+      </div>
+      <div class="cg-card">
+        <div class="cg-icon">⚙️</div>
+        <div class="cg-title">Automazione su misura</div>
+        <div class="cg-desc">Ogni processo ripetitivo che ti fa perdere tempo, lo automatizziamo.</div>
+      </div>
+      <div class="cg-card">
+        <div class="cg-icon">📑</div>
+        <div class="cg-title">Report automatici</div>
+        <div class="cg-desc">Report generati e inviati ogni giorno o settimana, senza intervento umano.</div>
+      </div>
+      <div class="cg-card">
+        <div class="cg-icon">🔗</div>
+        <div class="cg-title">Integrazioni</div>
+        <div class="cg-desc">Connettiamo i tool aziendali che oggi non si parlano.</div>
+      </div>
+      <div class="cg-card">
+        <div class="cg-icon">💡</div>
+        <div class="cg-title">Tutto il resto</div>
+        <div class="cg-desc">Se è fattibile con AI o con codice, lo facciamo. Raccontaci la tua idea.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESSO -->
+<section class="process-section">
+  <div class="container">
+    <div class="section-head dark">
       <span class="eyebrow">Come lavoriamo</span>
-      <h2 class="section-title">Da idea a produzione.<br>In tre settimane.</h2>
-
-      <div class="how-grid">
-        <div class="how-step">
-          <span class="step-num">01</span>
-          <h3>Analisi</h3>
-          <p>Una call gratuita per capire il tuo business, i punti deboli e dove la tecnologia può davvero migliorare i tuoi processi.</p>
-        </div>
-        <div class="how-step">
-          <span class="step-num">02</span>
-          <h3>Sviluppo</h3>
-          <p>In 2 settimane realizziamo un prototipo funzionante con i tuoi dati reali. Testi, vedi, decidi se procedere.</p>
-        </div>
-        <div class="how-step">
-          <span class="step-num">03</span>
-          <h3>Messa in opera</h3>
-          <p>Deploy sui server, formazione del tuo team, monitoraggio continuo. Sei autonomo dal primo giorno.</p>
-        </div>
+      <h2>Dalla call al go-live<br>in <span class="grad-text">3 settimane</span>.</h2>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-title">Chiamata 30 min</div>
+        <div class="step-desc">Capiamo cosa ti serve e se possiamo aiutarti. Niente fluff.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-title">Demo personalizzata</div>
+        <div class="step-desc">Ti facciamo vedere la soluzione che funziona già sul tuo caso.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-title">Setup + test</div>
+        <div class="step-desc">Configuriamo tutto, integriamo coi tuoi sistemi, testiamo insieme.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-title">Go live</div>
+        <div class="step-desc">Vai live. Noi ci siamo se serve. Tu fai impresa, non IT.</div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- ABOUT -->
-  <section class="section section-dark" id="about">
-    <div class="container container-narrow">
-      <span class="eyebrow">Chi siamo</span>
-      <h2 class="section-title">Una squadra italiana<br>che pensa in grande.</h2>
-      <p class="big-text">
-        Crediamo che le PMI italiane meritino strumenti tecnologici tanto buoni quanto quelli usati dalle multinazionali.
-        Niente costi enterprise, niente integrazioni infinite, niente promesse vuote — solo soluzioni che funzionano
-        e generano valore concreto, ogni giorno.
-      </p>
+<!-- CTA FINAL -->
+<section id="contatti" class="cta-final">
+  <div class="container">
+    <h2 class="cta-h">Vuoi vedere<br>se può funzionare<br>per te?</h2>
+    <p class="cta-p">Una chiamata di 30 minuti, gratuita. Zero impegno.<br>Capiamo se ti possiamo aiutare. Se no, ti diciamo di no.</p>
+    <a href="mailto:info@craftlabs.it?subject=Vorrei prenotare una chiamata" class="btn-primary big">Scrivici a info@craftlabs.it →</a>
+    <div class="cta-foot">
+      <span>Bergamo, Italia</span>
+      <span class="dotdiv">·</span>
+      <span>info@craftlabs.it</span>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- CONTACT -->
-  <section class="section section-cta" id="contact">
-    <div class="container container-narrow">
-      <h2 class="section-title">Hai un'idea?<br>Ne parliamo.</h2>
-      <p class="big-text">Scrivici. Ti rispondiamo entro 24 ore con una proposta concreta.</p>
-      <a href="mailto:info@craftlabs.it" class="btn btn-primary btn-large">info@craftlabs.it</a>
-    </div>
-  </section>
-
-  <!-- FOOTER -->
-  <footer class="footer">
-    <div class="container">
-      <div class="footer-inner">
-        <span class="logo">CRAFTLABS<span class="dot">.</span></span>
-        <span class="footer-meta">© 2026 Craftlabs · Made in Italy · info@craftlabs.it</span>
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="ft-row">
+      <div class="ft-brand">
+        <svg class="logo-mark" viewBox="0 0 100 100" aria-hidden="true">
+          <rect width="100" height="100" rx="22" fill="#0a0a0a"/>
+          <path d="M72 28 Q40 28 40 50 Q40 72 72 72" stroke="url(#logoGrad)" stroke-width="12" fill="none" stroke-linecap="round"/>
+        </svg>
+        <span>CRAFTLABS</span>
       </div>
+      <div class="ft-copy">© 2026 Craftlabs · info@craftlabs.it · Bergamo, IT</div>
     </div>
-  </footer>
+  </div>
+</footer>
 
+<script src="script.js"></script>
 </body>
 </html>
