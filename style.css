@@ -446,69 +446,184 @@ button { font: inherit; cursor: pointer; border: none; }
   flex-shrink: 0;
 }
 
-/* ─── MARS section (Listen to Marco) ───────────────────────────────────── */
-.mars-content {
-  position: relative; z-index: 2;
-  display: flex;
-  justify-content: flex-end;
-}
-.mars-card {
-  background: #fff;
-  color: var(--black);
-  border-radius: 32px;
-  padding: 56px;
-  max-width: 580px;
-  box-shadow: 0 30px 80px rgba(0,0,0,0.4);
-}
-.mars-card h2 {
-  font-size: clamp(36px, 4vw, 52px);
-  font-weight: 800;
-  letter-spacing: -0.025em;
-  margin-bottom: 20px;
-  line-height: 1.05;
-}
-.mars-card p {
-  color: var(--text-soft);
-  font-size: 17px;
-  line-height: 1.55;
-  margin-bottom: 32px;
-}
-.audio-mock {
-  background: var(--cream);
-  border-radius: 16px;
-  padding: 24px;
-  display: flex; align-items: center; gap: 20px;
-  margin-bottom: 28px;
+/* ─── TRIPLE SHOWCASE (Mars background, 3 canali bilanciati) ───────────── */
+.section-mars-triple {
+  background: var(--black);
   position: relative;
+  overflow: hidden;
+  padding: 130px 0;
 }
+.triple-content {
+  position: relative; z-index: 2;
+  text-align: center;
+}
+.triple-head {
+  max-width: 720px;
+  margin: 0 auto 80px;
+  color: #fff;
+  text-align: center;
+}
+.triple-head h2 {
+  font-size: clamp(40px, 6vw, 76px);
+  font-weight: 800;
+  letter-spacing: -0.035em;
+  line-height: 0.98;
+  color: #fff;
+  margin-bottom: 24px;
+}
+.triple-head p {
+  font-size: clamp(16px, 1.5vw, 19px);
+  color: rgba(255,255,255,0.8);
+  line-height: 1.55;
+}
+.triple-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-bottom: 60px;
+}
+@media (max-width: 980px) { .triple-grid { grid-template-columns: 1fr; } }
+
+.demo-card {
+  background: #fff;
+  border-radius: 24px;
+  padding: 24px;
+  display: flex; flex-direction: column;
+  text-align: left;
+  min-height: 460px;
+  box-shadow: 0 30px 80px rgba(0,0,0,0.3);
+}
+.demo-card-head {
+  display: flex; align-items: center; gap: 12px;
+  margin-bottom: 20px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+}
+.dc-icon {
+  width: 36px; height: 36px;
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  color: #fff;
+}
+.dc-email { background: #4285F4; }
+.dc-wa { background: #25D366; }
+.dc-voice { background: linear-gradient(135deg, var(--mars), var(--mars-2)); }
+.dc-title { font-weight: 700; font-size: 16px; }
+.demo-card-body {
+  flex: 1;
+  display: flex; flex-direction: column;
+  gap: 12px;
+  overflow: hidden;
+}
+.demo-card-foot {
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+  font-size: 13px;
+  color: var(--text-soft);
+}
+.demo-card-foot b { color: var(--mars); font-weight: 700; font-size: 14px; }
+.triple-cta { text-align: center; }
+
+/* EMAIL THREAD */
+.email-thread {
+  display: flex; flex-direction: column; gap: 10px;
+  font-size: 12px;
+}
+.et-msg {
+  background: #f8f8f5;
+  border-radius: 10px;
+  padding: 12px;
+}
+.et-msg.et-out {
+  background: #fff5f1;
+  border-left: 3px solid var(--mars);
+}
+.et-from { font-size: 11px; color: var(--text-soft); font-weight: 600; margin-bottom: 4px; }
+.et-text { color: #333; line-height: 1.5; }
+
+/* WHATSAPP CHAT */
+.demo-card-wa .demo-card-body { background: #ECE5DD; border-radius: 12px; padding: 14px; gap: 6px; }
+.wa-screen {
+  display: flex; flex-direction: column;
+  gap: 6px;
+}
+.wa-bubble {
+  max-width: 80%; padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 12px;
+  line-height: 1.4;
+  box-shadow: 0 1px 1px rgba(0,0,0,0.05);
+}
+.wa-bubble.wa-in { background: #fff; align-self: flex-start; border-bottom-left-radius: 2px; }
+.wa-bubble.wa-out { background: #DCF8C6; align-self: flex-end; border-bottom-right-radius: 2px; }
+
+/* VOICE DEMO */
+.voice-body { gap: 14px; }
+.play-row {
+  display: flex; align-items: center; gap: 12px;
+  padding: 12px 16px;
+  background: var(--black);
+  color: #fff;
+  border-radius: 100px;
+  font-weight: 600;
+  font-size: 13px;
+  transition: background 0.2s, transform 0.2s;
+  align-self: stretch;
+}
+.play-row:hover { background: var(--mars); transform: translateY(-1px); }
+.play-row.playing { background: var(--mars); }
+.play-icon {
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.15);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.play-row.playing .play-icon svg { display: none; }
+.play-row.playing .play-icon::before {
+  content: '';
+  width: 8px; height: 8px;
+  background: #fff;
+  border-radius: 1px;
+}
+.play-label { flex: 1; text-align: left; }
 .audio-bars {
-  flex: 1;
-  display: flex; gap: 3px;
-  align-items: center;
-  height: 60px;
+  display: flex; gap: 2px; align-items: center;
+  height: 24px;
+  flex-shrink: 0;
 }
+.audio-bars-sm { height: 20px; gap: 2px; }
 .audio-bars span {
-  flex: 1;
-  background: #c19a6b;
+  width: 2px;
+  background: #fff;
   border-radius: 2px;
-  animation: audiopulse 1.6s ease-in-out infinite;
+  animation: audiopulse 1.4s ease-in-out infinite;
+  opacity: 0.5;
 }
 .audio-bars span:nth-child(odd) { animation-delay: 0.2s; }
 .audio-bars span:nth-child(3n) { animation-delay: 0.4s; }
 .audio-bars span:nth-child(5n) { animation-delay: 0.6s; }
+.play-row.playing .audio-bars span { opacity: 1; background: #fff; }
 @keyframes audiopulse {
-  0%, 100% { opacity: 0.5; transform: scaleY(0.8); }
-  50% { opacity: 1; transform: scaleY(1); }
+  0%, 100% { transform: scaleY(0.4); opacity: 0.4; }
+  50% { transform: scaleY(1); opacity: 1; }
 }
-.play-btn {
-  width: 56px; height: 56px;
-  border-radius: 50%;
-  background: var(--black);
-  display: flex; align-items: center; justify-content: center;
-  flex-shrink: 0;
-  transition: transform 0.2s, background 0.2s;
+.voice-trans {
+  display: flex; flex-direction: column;
+  gap: 6px;
+  flex: 1;
+  font-size: 11px;
+  overflow-y: auto;
 }
-.play-btn:hover { background: var(--mars); transform: scale(1.05); }
+.vt-line {
+  padding: 7px 10px;
+  border-radius: 8px;
+  line-height: 1.4;
+  color: #333;
+}
+.vt-line b { font-weight: 700; }
+.vt-bot { background: #fff5f1; border-left: 2px solid var(--mars); }
+.vt-user { background: #f8f8f5; border-left: 2px solid #ccc; }
 
 /* ─── CREAM (process) ──────────────────────────────────────────────────── */
 .process-cols {
