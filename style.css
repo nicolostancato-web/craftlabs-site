@@ -366,6 +366,63 @@ button { font: inherit; cursor: pointer; border: none; }
   background: #fff;
 }
 .pin-dot-2 { background: var(--mars-2); }
+
+/* COMPARATIVE STATS (replaces 2-dot chart) */
+.t-stats {
+  display: flex; flex-direction: column;
+  gap: 24px;
+  padding: 8px 0;
+}
+.t-stat-row {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr 1fr;
+  gap: 12px;
+  align-items: center;
+}
+.t-stat-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-soft);
+}
+.t-stat-bar {
+  height: 32px;
+  background: rgba(0,0,0,0.04);
+  border-radius: 6px;
+  position: relative;
+  overflow: hidden;
+}
+.t-stat-fill {
+  height: 100%;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+  min-width: 38px;
+  transition: width 1s ease-out;
+}
+.t-stat-fill span {
+  font-size: 12px;
+  font-weight: 700;
+  color: #fff;
+  white-space: nowrap;
+}
+.t-stat-old { background: linear-gradient(90deg, #9a9a9a, #6e6e6e); }
+.t-stat-new { background: var(--grad); }
+.t-stat-legend {
+  display: flex; gap: 24px;
+  margin-top: 8px;
+  font-size: 13px;
+  color: var(--text-soft);
+  font-weight: 500;
+}
+.t-legend-item { display: inline-flex; align-items: center; gap: 8px; }
+.t-dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+.t-dot-old { background: #6e6e6e; }
+.t-dot-new { background: var(--mars); }
+@media (max-width: 600px) {
+  .t-stat-row { grid-template-columns: 1fr; gap: 6px; }
+  .t-stat-label { margin-bottom: 4px; }
+}
 .t-pin1 { left: 38%; top: 35%; }
 .t-pin2 { left: 70%; top: 6%; }
 
