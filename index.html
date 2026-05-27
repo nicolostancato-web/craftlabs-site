@@ -3,21 +3,22 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Craftlabs — Agenti AI, risultati umani.</title>
-<meta name="description" content="Craftlabs costruisce agenti AI che gestiscono email, WhatsApp e telefonate per le PMI italiane. 24/7. In italiano. Risultati umani.">
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%230a0a0a'/><circle cx='35' cy='50' r='14' fill='%23ff5733'/><circle cx='65' cy='50' r='14' fill='%23e63946' opacity='0.85'/></svg>">
+<title>Craftlabs — Agenti AI e siti web per le PMI italiane.</title>
+<meta name="description" content="Agenti AI che rispondono a email, WhatsApp e telefono 24/7. Siti web professionali a tariffa fissa €500, online in 7 giorni. Studio italiano.">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%230F1A2E'/><circle cx='37' cy='50' r='15' fill='%23C5421B'/><circle cx='63' cy='50' r='15' fill='%23E89A6B' opacity='0.9'/></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700;9..144,800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<!-- TOP ANNOUNCEMENT BAR -->
+<!-- TOPBAR -->
 <div class="topbar">
   <a href="#contatti" class="topbar-link">
-    Sara, Marco e Lisa hanno generato +2.000 preventivi.&nbsp;
-    <span class="tb-arrow">Scopri come ↗</span>
+    <span class="tb-dot"></span>
+    Studio italiano · attivi su 3 progetti questa settimana
+    <span class="tb-arrow">Scrivici →</span>
   </a>
 </div>
 
@@ -32,274 +33,175 @@
       <span class="brand-text">Craftlabs</span>
     </a>
     <ul class="nav-links">
-      <li><a href="#automazione">Automazione AI</a></li>
-      <li><a href="#siti">Siti Web</a></li>
+      <li><a href="#automazione">Automazioni AI</a></li>
+      <li><a href="#siti">Siti web</a></li>
+      <li><a href="#processo">Come lavoriamo</a></li>
       <li><a href="#contatti">Contatti</a></li>
     </ul>
-    <a href="#contatti" class="nav-cta">Prenota demo</a>
+    <a href="mailto:info@craftlabs.it?subject=Richiesta%20informazioni%20Craftlabs" class="nav-cta">Scrivici</a>
   </div>
 </nav>
 
-<!-- PICKER — 2 verticali in evidenza -->
-<section class="picker">
-  <div class="picker-grid">
-    <a href="#automazione" class="picker-card picker-auto">
-      <span class="picker-tag">01 / Automazioni AI</span>
-      <h2 class="picker-h">Agenti AI<br>per la tua PMI.</h2>
-      <p class="picker-p">Email, WhatsApp e voce, gestite 24/7 in italiano. Tu vedi solo il risultato.</p>
-      <span class="picker-cta">Scopri ↓</span>
-    </a>
-    <a href="#siti" class="picker-card picker-sites">
-      <span class="picker-tag">02 / Siti Web</span>
-      <h2 class="picker-h">Sito web<br>chiavi in mano.</h2>
-      <p class="picker-p">Sviluppo siti moderni per PMI. Tariffa fissa €500, online in 7 giorni. Codice tuo.</p>
-      <span class="picker-cta">Scopri ↓</span>
-    </a>
-  </div>
-</section>
-
-<!-- HERO — Mars background -->
-<section id="automazione" class="hero">
-  <div class="hero-bg">
-    <img src="https://images.unsplash.com/photo-1614728263952-84ea256f9679?w=2400&q=80" alt="" loading="eager">
-    <div class="hero-overlay"></div>
-  </div>
-  <div class="hero-content">
-    <h1 class="hero-title">
-      Mai più<br>
-      una richiesta persa.
-    </h1>
-    <p class="hero-sub">Risposte immediate a email, WhatsApp e telefono. In italiano. 24 ore al giorno.</p>
-    <div class="hero-cta">
-      <a href="#contatti" class="btn-pill">Prenota demo</a>
+<!-- HERO -->
+<header class="hero">
+  <div class="container hero-inner">
+    <div class="hero-left">
+      <span class="eyebrow">Studio AI · Italia</span>
+      <h1 class="hero-h">
+        Tecnologia di livello enterprise.<br>
+        <em>Prezzi da artigiano.</em>
+      </h1>
+      <p class="hero-p">
+        Costruiamo due cose, fatte bene: <b>agenti AI</b> che gestiscono email, WhatsApp e telefono al posto tuo, e <b>siti web</b> professionali a tariffa fissa. Per piccole e medie imprese italiane che hanno smesso di perdere clienti per mancanza di tempo.
+      </p>
+      <div class="hero-cta-row">
+        <a href="#automazione" class="btn btn-primary">Vedi gli agenti AI</a>
+        <a href="#siti" class="btn btn-ghost">Vedi i siti web</a>
+      </div>
+      <div class="hero-meta">
+        <div class="hm-item">
+          <div class="hm-num">+2.000</div>
+          <div class="hm-lbl">preventivi gestiti dai nostri agenti</div>
+        </div>
+        <div class="hm-sep"></div>
+        <div class="hm-item">
+          <div class="hm-num">7 giorni</div>
+          <div class="hm-lbl">dal pagamento al sito online</div>
+        </div>
+        <div class="hm-sep"></div>
+        <div class="hm-item">
+          <div class="hm-num">100%</div>
+          <div class="hm-lbl">soddisfatti o rimborsati</div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="hero-card">
+        <div class="hc-window">
+          <span class="hc-dots"><i></i><i></i><i></i></span>
+          <span class="hc-url">whatsapp · Lisa risponde</span>
+        </div>
+        <div class="hc-chat">
+          <div class="hc-msg hc-in">Salve, vorrei un preventivo per uno spurgo</div>
+          <div class="hc-msg hc-out">Certo. Mi dice indirizzo e tipo di intervento?</div>
+          <div class="hc-msg hc-in">Via Roma 12 Bergamo, fossa biologica 3000L</div>
+          <div class="hc-msg hc-out">Ultimo svuotamento? Le serve oggi o nei prossimi giorni?</div>
+          <div class="hc-msg hc-in">2 anni fa, anche domani va bene</div>
+          <div class="hc-msg hc-out">Perfetto. 180€ + IVA, sabato mattina alle 9. Confermo?</div>
+          <div class="hc-msg hc-typing"><span></span><span></span><span></span></div>
+        </div>
+        <div class="hc-foot">
+          <span class="hc-status"><i class="hc-pulse"></i> Lisa è attiva 24/7</span>
+          <span class="hc-time">Risposta media · 2 sec</span>
+        </div>
+      </div>
     </div>
   </div>
-  <div class="hero-logos">
-    <span class="hl-label">Connesso a</span>
-    <div class="hl-row">
-      <span>WhatsApp</span>
-      <span>·</span>
-      <span>Gmail</span>
-      <span>·</span>
-      <span>Outlook</span>
-      <span>·</span>
-      <span>Calendar</span>
-      <span>·</span>
-      <span>Slack</span>
-      <span>·</span>
-      <span>Notion</span>
-      <span>·</span>
-      <span>Stripe</span>
+
+  <!-- LOGOS STRIP -->
+  <div class="logos-strip">
+    <div class="container ls-inner">
+      <span class="ls-label">Connessa a</span>
+      <div class="ls-row">
+        <span class="ls-item">WhatsApp Business</span>
+        <span class="ls-item">Gmail</span>
+        <span class="ls-item">Outlook</span>
+        <span class="ls-item">Google Calendar</span>
+        <span class="ls-item">Stripe</span>
+        <span class="ls-item">Notion</span>
+        <span class="ls-item">Slack</span>
+      </div>
     </div>
   </div>
-</section>
+</header>
 
-<!-- INTRO Light section -->
-<section id="agenti" class="section section-light">
-  <div class="container narrow">
-    <span class="eyebrow">I tuoi 3 canali</span>
-    <h2 class="display-h">Email, WhatsApp e voce.<br>Coperti tutti.</h2>
-    <p class="display-p">Mentre tu fai impresa, le richieste dei tuoi clienti vengono raccolte, qualificate e trasformate in preventivi. Tu vedi solo il risultato finale.</p>
-    <a href="#contatti" class="btn-pill btn-dark">Prenota demo</a>
-  </div>
-</section>
-
-<!-- TRASFORMA IL TUO TEAM — beige -->
-<section class="section section-beige">
-  <div class="container narrow">
-    <h2 class="display-h dark">Trasforma<br>il tuo team</h2>
-    <p class="display-p">Intelligenti, in italiano, integrati nei tuoi processi. I nostri agenti portano AI di livello enterprise nelle tue operazioni quotidiane, senza assunzioni.</p>
-  </div>
-
+<!-- ===== AUTOMAZIONI AI ===== -->
+<section id="automazione" class="section">
   <div class="container">
-    <div class="transform-grid">
-      <div class="t-card t-chart">
-        <div class="t-card-head">Confronto produttività media settore</div>
-        <div class="t-stats">
-          <div class="t-stat-row">
-            <div class="t-stat-label">Tempo medio risposta cliente</div>
-            <div class="t-stat-bar">
-              <div class="t-stat-fill t-stat-old" style="width: 100%">
-                <span>4 ore</span>
-              </div>
-            </div>
-            <div class="t-stat-bar">
-              <div class="t-stat-fill t-stat-new" style="width: 8%">
-                <span>2 sec</span>
-              </div>
-            </div>
-          </div>
-          <div class="t-stat-row">
-            <div class="t-stat-label">Preventivi gestiti / settimana</div>
-            <div class="t-stat-bar">
-              <div class="t-stat-fill t-stat-old" style="width: 30%">
-                <span>20</span>
-              </div>
-            </div>
-            <div class="t-stat-bar">
-              <div class="t-stat-fill t-stat-new" style="width: 100%">
-                <span>150+</span>
-              </div>
-            </div>
-          </div>
-          <div class="t-stat-row">
-            <div class="t-stat-label">Chiamate gestite fuori orario</div>
-            <div class="t-stat-bar">
-              <div class="t-stat-fill t-stat-old" style="width: 0%">
-                <span>0</span>
-              </div>
-            </div>
-            <div class="t-stat-bar">
-              <div class="t-stat-fill t-stat-new" style="width: 100%">
-                <span>Tutte</span>
-              </div>
-            </div>
-          </div>
-          <div class="t-stat-legend">
-            <span class="t-legend-item"><i class="t-dot t-dot-old"></i> Senza Craftlabs</span>
-            <span class="t-legend-item"><i class="t-dot t-dot-new"></i> Con Craftlabs</span>
-          </div>
-        </div>
-      </div>
 
-      <div class="t-card t-network">
-        <div class="t-network-orbit">
-          <div class="orbit-center orbit-center-logo">
-            <span class="oc-mark">
-              <span class="bm-dot bm-dot-1"></span>
-              <span class="bm-dot bm-dot-2"></span>
-            </span>
-          </div>
-          <div class="orbit-app oa-1">📅</div>
-          <div class="orbit-app oa-2">📧</div>
-          <div class="orbit-app oa-3">💬</div>
-          <div class="orbit-app oa-4">📊</div>
-          <div class="orbit-app oa-5">🗄️</div>
-          <div class="orbit-app oa-6">📞</div>
-        </div>
-        <div class="t-network-cap">Connessa a tutto quello che usi</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- AMPLIFY INTELLIGENCE — dark teal -->
-<section id="processi" class="section section-teal">
-  <div class="container narrow">
-    <span class="eyebrow-light">Processi 24/7</span>
-    <h2 class="display-h light">Più velocità.<br>Più conversioni.</h2>
-    <p class="display-p light">Liberi il tuo team dalle attività ripetitive e lasci che gli agenti gestiscono migliaia di interazioni in parallelo, sempre nel tuo tono.</p>
-    <a href="#contatti" class="btn-pill btn-light">Prenota demo</a>
-  </div>
-
-  <div class="chips-area">
-    <div class="chip-row chip-row-1">
-      <span class="chip">▪ Risposta in 2 secondi</span>
-      <span class="chip">▪ Zero email perse</span>
-      <span class="chip">▪ Preventivi automatici</span>
-      <span class="chip">▪ Riduce costi del personale</span>
-      <span class="chip">▪ Disponibile 24/7</span>
-      <span class="chip">▪ Risposta in 2 secondi</span>
-      <span class="chip">▪ Zero email perse</span>
-      <span class="chip">▪ Preventivi automatici</span>
-    </div>
-    <div class="chip-row chip-row-2">
-      <span class="chip">▪ Tono brand-perfect</span>
-      <span class="chip">▪ Conversazioni in italiano</span>
-      <span class="chip">▪ Integrato col tuo CRM</span>
-      <span class="chip">▪ Riduce risposte lente</span>
-      <span class="chip">▪ Scala con te</span>
-      <span class="chip">▪ Tono brand-perfect</span>
-      <span class="chip">▪ Conversazioni in italiano</span>
-      <span class="chip">▪ Integrato col tuo CRM</span>
-    </div>
-    <div class="chip-row chip-row-1">
-      <span class="chip">▪ +30% lead qualificati</span>
-      <span class="chip">▪ Setup in 3 settimane</span>
-      <span class="chip">▪ Audit gratuito</span>
-      <span class="chip">▪ Operatività garantita</span>
-      <span class="chip">▪ +30% lead qualificati</span>
-      <span class="chip">▪ Setup in 3 settimane</span>
-      <span class="chip">▪ Audit gratuito</span>
-      <span class="chip">▪ Operatività garantita</span>
-    </div>
-  </div>
-</section>
-
-<!-- VEDI GLI AGENTI AL LAVORO — Mars background, 3 canali bilanciati -->
-<section class="section section-mars-triple">
-  <div class="hero-bg">
-    <img src="https://images.unsplash.com/photo-1614732414444-096e5f1122d5?w=2400&q=80" alt="" loading="lazy">
-    <div class="hero-overlay light-overlay"></div>
-  </div>
-
-  <div class="container triple-content">
-    <div class="triple-head">
-      <h2>Tre canali.<br>Una sola intelligenza.</h2>
-      <p>Email, WhatsApp e telefono. Gli agenti lavorano in parallelo sui tre canali con la stessa knowledge base e lo stesso tono. Sempre in italiano.</p>
+    <div class="sect-head">
+      <span class="eyebrow">01 / Automazioni AI</span>
+      <h2 class="section-h">Tre canali.<br><em>Una sola intelligenza.</em></h2>
+      <p class="section-p">
+        I tuoi clienti scrivono dove vogliono: email, WhatsApp, telefono. I nostri agenti rispondono ovunque, nel tuo tono, sempre in italiano. Tu vedi solo il riepilogo a fine giornata.
+      </p>
     </div>
 
-    <div class="triple-grid">
+    <!-- 3 DEMO CARDS -->
+    <div class="channels-grid">
 
-      <!-- EMAIL DEMO -->
-      <div class="demo-card">
-        <div class="demo-card-head">
-          <div class="dc-icon dc-email">
-            <svg viewBox="0 0 24 24" width="18" height="18"><path fill="currentColor" d="M22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2zm-2 0l-8 5l-8-5zm0 12H4V8l8 5l8-5z"/></svg>
+      <article class="ch-card">
+        <header class="ch-head">
+          <span class="ch-ico" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="20" height="20"><path fill="currentColor" d="M22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2zm-2 0l-8 5l-8-5zm0 12H4V8l8 5l8-5z"/></svg>
+          </span>
+          <div>
+            <h3 class="ch-name">Sara</h3>
+            <span class="ch-sub">Agente Email</span>
           </div>
-          <div class="dc-title">Sara · Email</div>
-        </div>
-        <div class="demo-card-body">
+        </header>
+        <div class="ch-body">
           <div class="email-thread">
             <div class="et-msg et-in">
               <div class="et-from">Mario Rossi</div>
-              <div class="et-text">Salve, vorrei un preventivo per servizi di pulizia ufficio, 200 mq.</div>
+              <div class="et-text">Salve, vorrei preventivo pulizia ufficio 200 mq.</div>
             </div>
             <div class="et-msg et-out">
-              <div class="et-from">Sara · risponde</div>
-              <div class="et-text">Buongiorno Sig. Rossi,<br>per il preventivo accurato avrei bisogno di:<br>• indirizzo<br>• frequenza desiderata<br>• orari preferiti<br>In allegato il listino base.</div>
+              <div class="et-from">Sara risponde · 2 sec</div>
+              <div class="et-text">Buongiorno Sig. Rossi,<br>per il preventivo accurato mi servono:<br>· indirizzo<br>· frequenza<br>· orari preferiti.<br>Allego intanto il listino base.</div>
             </div>
           </div>
         </div>
-        <div class="demo-card-foot"><b>2 sec</b> tempo risposta</div>
-      </div>
+        <footer class="ch-foot">
+          <span><b>0</b> email perse</span>
+          <span><b>2 sec</b> tempo risposta</span>
+        </footer>
+      </article>
 
-      <!-- WHATSAPP DEMO -->
-      <div class="demo-card demo-card-wa">
-        <div class="demo-card-head">
-          <div class="dc-icon dc-wa">
-            <svg viewBox="0 0 24 24" width="18" height="18"><path fill="currentColor" d="M17.5 14.4c-.3-.1-1.7-.9-2-1c-.3-.1-.5-.1-.7.2c-.2.3-.8 1-.9 1.2c-.2.2-.3.2-.6.1c-.3-.2-1.3-.5-2.4-1.5c-.9-.8-1.5-1.8-1.7-2.1c-.2-.3 0-.5.1-.6c.1-.1.3-.3.4-.5c.2-.2.2-.3.3-.5c.1-.2 0-.4 0-.5c0-.2-.7-1.6-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4C6.7 7.2 6 7.9 6 9.4c0 1.5 1.1 2.9 1.2 3.1c.1.2 2.1 3.2 5.1 4.5c.7.3 1.3.5 1.7.6c.7.2 1.4.2 1.9.1c.6-.1 1.8-.7 2-1.4c.2-.7.2-1.3.2-1.4c-.1-.1-.3-.2-.6-.4M12 21.8h0c-1.8 0-3.5-.5-5-1.4l-.4-.2l-3.7 1l1-3.6l-.2-.4c-1-1.6-1.5-3.4-1.5-5.3c0-5.4 4.4-9.9 9.9-9.9c2.6 0 5.1 1 7 2.9c1.9 1.9 2.9 4.4 2.9 7c0 5.5-4.4 9.9-9.9 9.9m8.4-18.3C18.2 1.2 15.2 0 12.1 0C5.5 0 .2 5.3.2 11.9c0 2.1.5 4.1 1.6 5.9L0 24l6.3-1.7c1.7.9 3.7 1.4 5.7 1.4h0c6.6 0 11.9-5.3 11.9-11.9c0-3.1-1.2-6.1-3.5-8.4"/></svg>
+      <article class="ch-card ch-featured">
+        <span class="ch-badge">Più richiesto</span>
+        <header class="ch-head">
+          <span class="ch-ico" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="20" height="20"><path fill="currentColor" d="M17.5 14.4c-.3-.1-1.7-.9-2-1c-.3-.1-.5-.1-.7.2c-.2.3-.8 1-.9 1.2c-.2.2-.3.2-.6.1c-.3-.2-1.3-.5-2.4-1.5c-.9-.8-1.5-1.8-1.7-2.1c-.2-.3 0-.5.1-.6c.1-.1.3-.3.4-.5c.2-.2.2-.3.3-.5c.1-.2 0-.4 0-.5c0-.2-.7-1.6-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4C6.7 7.2 6 7.9 6 9.4c0 1.5 1.1 2.9 1.2 3.1c.1.2 2.1 3.2 5.1 4.5c.7.3 1.3.5 1.7.6c.7.2 1.4.2 1.9.1c.6-.1 1.8-.7 2-1.4c.2-.7.2-1.3.2-1.4c-.1-.1-.3-.2-.6-.4M12 21.8c-1.8 0-3.5-.5-5-1.4l-.4-.2l-3.7 1l1-3.6l-.2-.4c-1-1.6-1.5-3.4-1.5-5.3c0-5.4 4.4-9.9 9.9-9.9c2.6 0 5.1 1 7 2.9c1.9 1.9 2.9 4.4 2.9 7c0 5.5-4.4 9.9-9.9 9.9m8.4-18.3C18.2 1.2 15.2 0 12.1 0C5.5 0 .2 5.3.2 11.9c0 2.1.5 4.1 1.6 5.9L0 24l6.3-1.7c1.7.9 3.7 1.4 5.7 1.4c6.6 0 11.9-5.3 11.9-11.9c0-3.1-1.2-6.1-3.5-8.4"/></svg>
+          </span>
+          <div>
+            <h3 class="ch-name">Lisa</h3>
+            <span class="ch-sub">Agente WhatsApp</span>
           </div>
-          <div class="dc-title">Lisa · WhatsApp</div>
-        </div>
-        <div class="demo-card-body">
+        </header>
+        <div class="ch-body">
           <div class="wa-screen">
             <div class="wa-bubble wa-in">Ciao, vorrei un preventivo per uno spurgo</div>
-            <div class="wa-bubble wa-out">Certo! Mi può dire indirizzo e tipo di intervento?</div>
+            <div class="wa-bubble wa-out">Certo! Mi dica indirizzo e tipo di intervento.</div>
             <div class="wa-bubble wa-in">Via Roma 12 Bergamo, fossa biologica</div>
             <div class="wa-bubble wa-out">Volume e ultimo svuotamento?</div>
             <div class="wa-bubble wa-in">3000L, 2 anni fa</div>
-            <div class="wa-bubble wa-out">✓ 180€ + IVA. Le invio il PDF?</div>
+            <div class="wa-bubble wa-out">180€ + IVA. Le invio il PDF?</div>
           </div>
         </div>
-        <div class="demo-card-foot"><b>24/7</b> sempre attiva</div>
-      </div>
+        <footer class="ch-foot">
+          <span><b>24/7</b> sempre attiva</span>
+          <span><b>+38%</b> conversione</span>
+        </footer>
+      </article>
 
-      <!-- VOICE DEMO -->
-      <div class="demo-card">
-        <div class="demo-card-head">
-          <div class="dc-icon dc-voice">
-            <svg viewBox="0 0 24 24" width="18" height="18"><path fill="currentColor" d="M20 15.5c-1.25 0-2.45-.2-3.57-.57a1 1 0 0 0-1.02.24l-2.2 2.2a15.05 15.05 0 0 1-6.59-6.58l2.2-2.21a.96.96 0 0 0 .25-1A11.36 11.36 0 0 1 8.5 4a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1c0 9.39 7.61 17 17 17a1 1 0 0 0 1-1v-3.5a1 1 0 0 0-1-1Z"/></svg>
+      <article class="ch-card">
+        <header class="ch-head">
+          <span class="ch-ico" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="20" height="20"><path fill="currentColor" d="M20 15.5c-1.25 0-2.45-.2-3.57-.57a1 1 0 0 0-1.02.24l-2.2 2.2a15.05 15.05 0 0 1-6.59-6.58l2.2-2.21a.96.96 0 0 0 .25-1A11.36 11.36 0 0 1 8.5 4a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1c0 9.39 7.61 17 17 17a1 1 0 0 0 1-1v-3.5a1 1 0 0 0-1-1Z"/></svg>
+          </span>
+          <div>
+            <h3 class="ch-name">Marco</h3>
+            <span class="ch-sub">Agente Voce</span>
           </div>
-          <div class="dc-title">Marco · Voce</div>
-        </div>
-        <div class="demo-card-body voice-body">
-          <button class="play-row" id="playMarco" aria-label="Ascolta Marco">
+        </header>
+        <div class="ch-body voice-body">
+          <button class="play-row" id="playMarco" aria-label="Ascolta una chiamata reale gestita da Marco">
             <span class="play-icon">
-              <svg viewBox="0 0 24 24" width="16" height="16"><path fill="#fff" d="M8 5v14l11-7z"/></svg>
+              <svg viewBox="0 0 24 24" width="14" height="14"><path fill="#fff" d="M8 5v14l11-7z"/></svg>
             </span>
             <span class="play-label">Ascolta Marco</span>
-            <span class="audio-bars audio-bars-sm">
+            <span class="audio-bars">
               <span style="height:30%"></span><span style="height:60%"></span>
               <span style="height:90%"></span><span style="height:45%"></span>
               <span style="height:75%"></span><span style="height:55%"></span>
@@ -308,154 +210,299 @@
             </span>
           </button>
           <div class="voice-trans">
-            <div class="vt-line vt-bot"><b>Marco:</b> Pronto, sono Marco di Craftlabs. Mi dica pure.</div>
-            <div class="vt-line vt-user"><b>Cliente:</b> Vorrei un preventivo per uno spurgo della fossa biologica.</div>
-            <div class="vt-line vt-bot"><b>Marco:</b> Certo. Mi può dire l'indirizzo e il volume stimato della fossa?</div>
-            <div class="vt-line vt-user"><b>Cliente:</b> Via Roma 12 Bergamo, circa 3000 litri.</div>
-            <div class="vt-line vt-bot"><b>Marco:</b> Perfetto. Il preventivo base è 180 euro più IVA. Procedo con l'invio del dettaglio via email?</div>
+            <div class="vt-line vt-bot"><b>Marco</b> · Pronto, sono Marco di Craftlabs. Mi dica pure.</div>
+            <div class="vt-line vt-user"><b>Cliente</b> · Vorrei un preventivo per uno spurgo della fossa biologica.</div>
+            <div class="vt-line vt-bot"><b>Marco</b> · Certo. Mi può dare indirizzo e volume stimato?</div>
+            <div class="vt-line vt-user"><b>Cliente</b> · Via Roma 12 Bergamo, 3000 litri.</div>
+            <div class="vt-line vt-bot"><b>Marco</b> · 180 euro più IVA. Le mando dettaglio via email?</div>
           </div>
         </div>
-        <div class="demo-card-foot"><b>100%</b> chiamate gestite</div>
+        <footer class="ch-foot">
+          <span><b>100%</b> chiamate gestite</span>
+          <span><b>0</b> attese cliente</span>
+        </footer>
+      </article>
+
+    </div>
+
+    <!-- COMPARISON STATS -->
+    <div class="compare">
+      <h3 class="compare-h">Cosa cambia, in pratica.</h3>
+      <div class="compare-grid">
+
+        <div class="cp-row">
+          <div class="cp-label">Tempo medio risposta cliente</div>
+          <div class="cp-bars">
+            <div class="cp-bar">
+              <span class="cp-track"><span class="cp-fill cp-old" style="width: 100%"></span></span>
+              <span class="cp-val cp-old-v">4 ore</span>
+            </div>
+            <div class="cp-bar">
+              <span class="cp-track"><span class="cp-fill cp-new" style="width: 8%"></span></span>
+              <span class="cp-val cp-new-v">2 sec</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="cp-row">
+          <div class="cp-label">Preventivi gestiti / settimana</div>
+          <div class="cp-bars">
+            <div class="cp-bar">
+              <span class="cp-track"><span class="cp-fill cp-old" style="width: 18%"></span></span>
+              <span class="cp-val cp-old-v">20</span>
+            </div>
+            <div class="cp-bar">
+              <span class="cp-track"><span class="cp-fill cp-new" style="width: 100%"></span></span>
+              <span class="cp-val cp-new-v">150+</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="cp-row">
+          <div class="cp-label">Chiamate gestite fuori orario</div>
+          <div class="cp-bars">
+            <div class="cp-bar">
+              <span class="cp-track"><span class="cp-fill cp-old" style="width: 4%"></span></span>
+              <span class="cp-val cp-old-v">0</span>
+            </div>
+            <div class="cp-bar">
+              <span class="cp-track"><span class="cp-fill cp-new" style="width: 100%"></span></span>
+              <span class="cp-val cp-new-v">Tutte</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="cp-legend">
+          <span class="lg-item"><i class="lg-dot lg-old"></i> Senza Craftlabs</span>
+          <span class="lg-item"><i class="lg-dot lg-new"></i> Con Craftlabs</span>
+        </div>
       </div>
-
     </div>
 
-    <div class="triple-cta">
-      <a href="#contatti" class="btn-pill btn-light">Prenota demo</a>
+    <!-- AUTOMAZIONI CTA -->
+    <div class="sect-cta">
+      <a href="mailto:info@craftlabs.it?subject=Vorrei%20capire%20se%20un%20agente%20AI%20fa%20al%20caso%20mio" class="btn btn-primary big">Capire se fa al caso mio →</a>
+      <span class="sect-cta-note">Audit gratuito · risposta entro 24h</span>
     </div>
+
   </div>
 </section>
 
-<!-- COME FUNZIONA — cream -->
-<section class="section section-cream">
-  <div class="container narrow">
-    <span class="eyebrow">Come lavorano</span>
-    <h2 class="display-h dark">Dal primo messaggio<br>al preventivo firmato.</h2>
-  </div>
-
+<!-- ===== SITI WEB ===== -->
+<section id="siti" class="section section-alt">
   <div class="container">
-    <div class="process-cols">
-      <div class="proc-col">
-        <h3>Capisce</h3>
-        <p>Legge il messaggio del cliente, identifica il bisogno e la priorità. Capisce anche dialetti e richieste poco chiare.</p>
-      </div>
-      <div class="proc-col">
-        <h3>Raccoglie</h3>
-        <p>Pone le domande giuste per arrivare al preventivo: tipo di servizio, indirizzo, urgenza. Una alla volta, mai bombardando.</p>
-      </div>
-      <div class="proc-col">
-        <h3>Personalizza</h3>
-        <p>Genera un preventivo PDF formattato col tuo brand, calcolato sui tuoi listini e sulle informazioni raccolte.</p>
-      </div>
-      <div class="proc-col">
-        <h3>Invia</h3>
-        <p>Manda il PDF al cliente via email, salva tutto nel database, ti notifica. Tu vedi solo l'esito finale.</p>
-      </div>
+
+    <div class="sect-head">
+      <span class="eyebrow">02 / Siti web</span>
+      <h2 class="section-h">Sito professionale.<br><em>Tariffa fissa €500.</em></h2>
+      <p class="section-p">
+        Sviluppo siti moderni per piccole e medie imprese italiane. Pagamento una sola volta, codice tuo, nessun abbonamento. Per chi ha un'attività vera e vuole un sito serio, senza pagare €1.500 a un'agenzia.
+      </p>
     </div>
-  </div>
 
-</section>
-
-<!-- ALTRO CHE FACCIAMO — light -->
-<section id="siti" class="section section-cream sites-section">
-  <div class="container narrow">
-    <span class="eyebrow">02 / Siti Web per PMI</span>
-    <h2 class="display-h dark">Un sito moderno<br>per la tua azienda.<br>Pronto in 7 giorni.</h2>
-    <p class="display-p">Sviluppo siti professionali per piccole imprese italiane. Tariffa fissa, codice di tua proprietà, nessun abbonamento.</p>
-  </div>
-
-  <div class="container">
+    <!-- GALLERY -->
     <div class="sites-gallery">
-      <img src="https://craftlabs-sites-bot-production.up.railway.app/img/hero.png" alt="Esempi siti web realizzati per carrozzerie" loading="lazy">
-    </div>
-  </div>
-
-  <div class="container">
-    <div class="sites-grid">
-      <div class="sites-card">
-        <span class="sites-num">€500</span>
-        <h3>Tariffa fissa</h3>
-        <p>Una volta sola. Nessun abbonamento mensile, nessuna sorpresa.</p>
-      </div>
-      <div class="sites-card">
-        <span class="sites-num">7 gg</span>
-        <h3>Consegna garantita</h3>
-        <p>Sito completo online entro 7 giorni lavorativi dal pagamento.</p>
-      </div>
-      <div class="sites-card">
-        <span class="sites-num">100%</span>
-        <h3>Codice tuo</h3>
-        <p>Dominio, hosting e codice intestati a te. Puoi modificare quando vuoi.</p>
-      </div>
+      <img src="https://craftlabs-sites-bot-production.up.railway.app/img/hero.png" alt="Esempi di siti web realizzati per piccole e medie imprese italiane" loading="lazy">
     </div>
 
-    <div class="sites-bullets">
-      <ul>
-        <li>Design moderno, ottimizzato per mobile</li>
-        <li>Form preventivo + integrazione WhatsApp</li>
-        <li>Recensioni Google in evidenza</li>
-        <li>Indicizzazione su Google curata</li>
-        <li>Soddisfatti o rimborsati</li>
+    <!-- 3 BIG CARDS -->
+    <div class="price-grid">
+      <div class="price-card">
+        <div class="pc-num">€500</div>
+        <h3 class="pc-h">Tariffa fissa</h3>
+        <p class="pc-p">Una volta sola. Nessun mensile. Nessuna sorpresa. Sul mercato lo trovi tra €1.000 e €1.500.</p>
+      </div>
+      <div class="price-card price-card-feature">
+        <div class="pc-num">7 gg</div>
+        <h3 class="pc-h">Consegna garantita</h3>
+        <p class="pc-p">Sito completo online entro 7 giorni lavorativi dal pagamento. Se sgarriamo, sconto del 20%.</p>
+      </div>
+      <div class="price-card">
+        <div class="pc-num">100%</div>
+        <h3 class="pc-h">Codice tuo</h3>
+        <p class="pc-p">Dominio, hosting e codice sorgente intestati a te. Puoi modificare, vendere o portare via tutto.</p>
+      </div>
+    </div>
+
+    <!-- INCLUDED -->
+    <div class="included">
+      <h3 class="included-h">Cosa è incluso, sempre.</h3>
+      <ul class="included-list">
+        <li><span class="ic-tick">✓</span> Design moderno ottimizzato per mobile</li>
+        <li><span class="ic-tick">✓</span> Form preventivo + WhatsApp diretto</li>
+        <li><span class="ic-tick">✓</span> Recensioni Google in evidenza</li>
+        <li><span class="ic-tick">✓</span> Indicizzazione su Google curata (SEO base)</li>
+        <li><span class="ic-tick">✓</span> Dominio + hosting primo anno inclusi</li>
+        <li><span class="ic-tick">✓</span> 1 revisione bozza inclusa</li>
+        <li><span class="ic-tick">✓</span> Soddisfatti o rimborsati entro 14 giorni</li>
       </ul>
     </div>
 
-    <div class="sites-cta-row">
-      <a href="mailto:info@craftlabs.it?subject=Richiesta preventivo sito web" class="btn-pill btn-dark">Richiedi un esempio</a>
+    <!-- FOR WHO -->
+    <div class="forwho">
+      <h3 class="forwho-h">Per chi è.</h3>
+      <div class="forwho-grid">
+        <div class="fw-tag">Carrozzerie</div>
+        <div class="fw-tag">Autospurgo</div>
+        <div class="fw-tag">Studi dentistici</div>
+        <div class="fw-tag">Ristoranti &amp; B&amp;B</div>
+        <div class="fw-tag">Artigiani &amp; idraulici</div>
+        <div class="fw-tag">Studi professionali</div>
+        <div class="fw-tag">Piccole agenzie</div>
+        <div class="fw-tag">Negozi locali</div>
+      </div>
+    </div>
+
+    <!-- CTA SITI -->
+    <div class="sect-cta">
+      <a href="mailto:info@craftlabs.it?subject=Richiesta%20preventivo%20sito%20web" class="btn btn-primary big">Richiedi un esempio per la tua attività →</a>
+      <span class="sect-cta-note">Risposta entro 24h · nessun impegno</span>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===== PROCESSO ===== -->
+<section id="processo" class="section">
+  <div class="container">
+
+    <div class="sect-head">
+      <span class="eyebrow">Come lavoriamo</span>
+      <h2 class="section-h">Quattro passi.<br><em>Niente sorprese.</em></h2>
+      <p class="section-p">
+        Lo stesso processo per agenti AI e siti web. Pochi giorni, costi chiari fin dall'inizio, contratto scritto.
+      </p>
+    </div>
+
+    <ol class="steps">
+      <li class="step">
+        <span class="step-n">01</span>
+        <h3 class="step-h">Chiamata 15 min</h3>
+        <p class="step-p">Ci sentiamo per capire cosa serve davvero. Niente venditore, parli col founder.</p>
+      </li>
+      <li class="step">
+        <span class="step-n">02</span>
+        <h3 class="step-h">Proposta scritta</h3>
+        <p class="step-p">Entro 48h ricevi proposta chiara con prezzo fisso, scadenze e cosa è incluso. Zero fine print.</p>
+      </li>
+      <li class="step">
+        <span class="step-n">03</span>
+        <h3 class="step-h">Costruzione</h3>
+        <p class="step-p">7 giorni per un sito, 2-3 settimane per un agente AI. Vedi i progressi giorno per giorno.</p>
+      </li>
+      <li class="step">
+        <span class="step-n">04</span>
+        <h3 class="step-h">Live &amp; garanzia</h3>
+        <p class="step-p">Andiamo online insieme. Hai 14 giorni per dirci "non funziona": rimborsiamo senza domande.</p>
+      </li>
+    </ol>
+
+  </div>
+</section>
+
+<!-- ===== GARANZIA BANNER ===== -->
+<section class="guarantee">
+  <div class="container guar-inner">
+    <div class="guar-icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24" width="36" height="36"><path fill="currentColor" d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12c5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4l1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>
+    </div>
+    <div class="guar-text">
+      <h3 class="guar-h">Soddisfatti o rimborsati. Sul serio.</h3>
+      <p class="guar-p">14 giorni dalla consegna per dirci "non fa per me". Restituiamo tutto, senza domande, senza penali. Funziona perché siamo bravi a dire di no a chi non possiamo aiutare davvero.</p>
     </div>
   </div>
 </section>
 
-<!-- CTA FINAL -->
+<!-- ===== FAQ ===== -->
+<section class="section">
+  <div class="container">
+
+    <div class="sect-head sect-head-tight">
+      <span class="eyebrow">Domande comuni</span>
+      <h2 class="section-h">Le risposte<br><em>che vi servono.</em></h2>
+    </div>
+
+    <div class="faq">
+      <details class="faq-item" open>
+        <summary>Perché €500 e non €1.500 come gli altri?</summary>
+        <div class="faq-a">Perché siamo uno studio piccolo senza commerciali. Niente call center, niente intermediari. Il prezzo dell'agenzia tradizionale paga 4-5 persone tra te e chi davvero scrive il codice. Noi siamo quelli che lo scrivono.</div>
+      </details>
+      <details class="faq-item">
+        <summary>Cosa succede dopo il primo anno con dominio e hosting?</summary>
+        <div class="faq-a">Te li giri tu su Vercel + IONOS (~€30/anno totali) o continuiamo noi a €80/anno tutto incluso. Senza obblighi, decidi al rinnovo.</div>
+      </details>
+      <details class="faq-item">
+        <summary>Posso modificare il sito da solo dopo?</summary>
+        <div class="faq-a">Sì. Il codice è tuo, su GitHub a tuo nome. Se vuoi piccole modifiche le fai con l'editor visuale che ti consegniamo. Modifiche grosse: 1 ora di lavoro nostro a €50.</div>
+      </details>
+      <details class="faq-item">
+        <summary>L'agente AI risponde davvero come una persona?</summary>
+        <div class="faq-a">Sì, usa Claude 4.6 (lo stato dell'arte degli LLM) addestrato sui tuoi listini, processi e tono. Nel 95% dei casi il cliente non capisce di parlare con un agente. Negli altri 5% capisce, ma riceve risposta giusta lo stesso.</div>
+      </details>
+      <details class="faq-item">
+        <summary>Quanto costa un agente AI al mese?</summary>
+        <div class="faq-a">Setup una tantum da €1.200, poi €99/mese tutto incluso (server, modello AI, manutenzione). Niente costi nascosti, niente per-messaggio. Cancellabile in qualsiasi momento.</div>
+      </details>
+      <details class="faq-item">
+        <summary>Lavorate solo in Lombardia o anche fuori?</summary>
+        <div class="faq-a">Ovunque in Italia. Tutto da remoto: call, demo, consegna online. Abbiamo clienti tra Bergamo, Bologna, Bari e Palermo.</div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CTA FINAL ===== -->
 <section id="contatti" class="cta-final">
-  <div class="container narrow">
-    <h2 class="cta-h">Pronto a scoprire<br>cosa cambia<br>per la tua impresa?</h2>
-    <p class="cta-p">30 minuti di chiamata. Capiamo se possiamo aiutarti. Se no, te lo diciamo.</p>
-    <a href="mailto:info@craftlabs.it?subject=Vorrei prenotare una demo" class="btn-pill btn-light big">Scrivici a info@craftlabs.it</a>
+  <div class="container cta-inner">
+    <span class="eyebrow eyebrow-light">Iniziamo</span>
+    <h2 class="cta-h">Una mail.<br><em>Risposta entro 24h.</em></h2>
+    <p class="cta-p">
+      Scrivici cosa fai e cosa stai cercando di risolvere. Se non possiamo aiutarti te lo diciamo subito, senza farti perdere tempo. Se sì, in 48h hai una proposta scritta.
+    </p>
+    <a href="mailto:info@craftlabs.it?subject=Vorrei%20parlare%20con%20Craftlabs" class="btn btn-primary huge">info@craftlabs.it</a>
+    <div class="cta-meta">
+      <span>📍 Italia</span>
+      <span>·</span>
+      <span>Risposta in giornata, sempre da un umano</span>
+    </div>
   </div>
 </section>
 
 <!-- FOOTER -->
-<footer>
-  <div class="container">
-    <div class="ft-grid">
-      <div class="ft-brand">
-        <div class="brand">
-          <span class="brand-mark">
-            <span class="bm-dot bm-dot-1"></span>
-            <span class="bm-dot bm-dot-2"></span>
-          </span>
-          <span class="brand-text">Craftlabs</span>
-        </div>
-        <p class="ft-tag">Agenti AI per le PMI italiane.</p>
+<footer class="footer">
+  <div class="container ft-inner">
+    <div class="ft-brand">
+      <div class="brand">
+        <span class="brand-mark">
+          <span class="bm-dot bm-dot-1"></span>
+          <span class="bm-dot bm-dot-2"></span>
+        </span>
+        <span class="brand-text">Craftlabs</span>
       </div>
-
+      <p class="ft-tag">Studio AI italiano. Agenti AI e siti web per le PMI.</p>
+    </div>
+    <div class="ft-cols">
       <div class="ft-col">
         <h4>Prodotti</h4>
-        <a href="#agenti">Email</a>
-        <a href="#agenti">WhatsApp</a>
-        <a href="#agenti">Voce</a>
+        <a href="#automazione">Agenti AI</a>
         <a href="#siti">Siti web</a>
-        <a href="#custom">Soluzioni custom</a>
+        <a href="#processo">Come lavoriamo</a>
       </div>
-
       <div class="ft-col">
-        <h4>Azienda</h4>
-        <a href="#contatti">Contattaci</a>
+        <h4>Contatti</h4>
         <a href="mailto:info@craftlabs.it">info@craftlabs.it</a>
         <span>Italia</span>
       </div>
-
       <div class="ft-col">
         <h4>Legal</h4>
         <a href="#">Privacy</a>
         <a href="#">Termini</a>
       </div>
     </div>
-
-    <div class="ft-bottom">
-      <span>© 2026 Craftlabs</span>
-      <span>info@craftlabs.it</span>
-    </div>
+  </div>
+  <div class="ft-bottom container">
+    <span>© 2026 Craftlabs</span>
+    <span>Fatto a mano in Italia</span>
   </div>
 </footer>
 
