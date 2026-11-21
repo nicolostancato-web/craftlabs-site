@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Craftlabs Onchain — Liquidation infrastructure on Ethereum</title>
+<meta name="description" content="Craftlabs Onchain builds and operates atomic liquidation infrastructure for Aave v3 on Ethereum mainnet.">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%230F1A2E'/></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #FAF6EE; --bg-soft: #F2EAD7; --surface: #FFFFFF; --ink: #0F1A2E; --ink-soft: #3B4658;
+    --muted: #6B7385; --rust: #C5421B; --navy: #1E3A5F; --line: #E5DAC1;
+    --serif: 'Fraunces', Georgia, serif; --sans: 'Inter', -apple-system, 'Segoe UI', sans-serif;
+    --mono: 'JetBrains Mono', ui-monospace, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #0D1422; --bg-soft: #131C2E; --surface: #172236; --ink: #F2ECE0; --ink-soft: #C9C2B4;
+      --muted: #8E97A8; --rust: #E2683F; --navy: #8FB0D9; --line: #26324A;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #0D1422; --bg-soft: #131C2E; --surface: #172236; --ink: #F2ECE0; --ink-soft: #C9C2B4;
+    --muted: #8E97A8; --rust: #E2683F; --navy: #8FB0D9; --line: #26324A;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--sans); line-height: 1.6; }
+  a { color: var(--navy); }
+  a:focus-visible { outline: 2px solid var(--rust); outline-offset: 3px; }
+  .wrap { max-width: 980px; margin: 0 auto; padding: 0 24px; }
+  header { border-bottom: 1px solid var(--line); }
+  .bar { display: flex; justify-content: space-between; align-items: center; padding: 20px 0; }
+  .brand { font-family: var(--serif); font-weight: 700; font-size: 1.25rem; color: var(--ink); text-decoration: none; }
+  .brand span { color: var(--rust); }
+  .bar a.home { font-size: .9rem; color: var(--muted); text-decoration: none; }
+  .hero { padding: 88px 0 64px; display: grid; gap: 20px; }
+  .eyebrow { font-size: .78rem; letter-spacing: .14em; text-transform: uppercase; color: var(--rust); font-weight: 600; }
+  h1 { font-family: var(--serif); font-weight: 600; font-size: clamp(2.2rem, 5vw, 3.6rem); line-height: 1.08; margin: 0; text-wrap: balance; }
+  .lede { font-size: 1.15rem; color: var(--ink-soft); max-width: 62ch; margin: 0; }
+  section { padding: 56px 0; border-top: 1px solid var(--line); }
+  h2 { font-family: var(--serif); font-weight: 600; font-size: 1.7rem; margin: 0 0 24px; text-wrap: balance; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
+  .card { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 24px; }
+  .card h3 { font-size: 1.02rem; margin: 0 0 8px; }
+  .card p { margin: 0; color: var(--ink-soft); font-size: .96rem; }
+  .flow { display: grid; gap: 14px; counter-reset: step; }
+  .flow li { list-style: none; display: grid; grid-template-columns: 44px 1fr; gap: 14px; align-items: start; }
+  .flow li::before { counter-increment: step; content: counter(step); font-family: var(--mono); font-size: .85rem;
+    width: 34px; height: 34px; border-radius: 50%; border: 1px solid var(--rust); color: var(--rust);
+    display: grid; place-items: center; }
+  .flow { padding: 0; margin: 0; }
+  .flow strong { display: block; }
+  .flow span { color: var(--ink-soft); font-size: .96rem; }
+  .table-wrap { overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; font-size: .94rem; }
+  th, td { text-align: left; padding: 12px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { font-size: .78rem; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+  code { font-family: var(--mono); font-size: .86rem; word-break: break-all; }
+  .contact { display: flex; flex-wrap: wrap; gap: 16px; align-items: center; }
+  .btn { display: inline-block; background: var(--ink); color: var(--bg); padding: 12px 22px; border-radius: 999px;
+    text-decoration: none; font-weight: 600; }
+  footer { padding: 40px 0 60px; color: var(--muted); font-size: .86rem; border-top: 1px solid var(--line); }
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap bar">
+    <a class="brand" href="/">Craftlabs<span> Onchain</span></a>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="hero">
+    <div class="eyebrow">Ethereum mainnet · Aave v3</div>
+    <h1>Liquidation infrastructure that settles in a single transaction.</h1>
+    <p class="lede">We build and operate the contracts and off-chain systems that keep Aave v3 positions healthy: unhealthy debt is repaid, collateral is sold and the loan is closed atomically, or nothing happens at all.</p>
+  </div>
+
+  <section>
+    <h2>What we run</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>Atomic liquidations</h3>
+        <p>Flash-funded repayment, collateral seizure and collateral sale inside one transaction. If any step fails, the whole transaction reverts.</p>
+      </div>
+      <div class="card">
+        <h3>Batched execution</h3>
+        <p>Several positions that become liquidatable in the same block are handled together in one transaction, with per-position isolation.</p>
+      </div>
+      <div class="card">
+        <h3>Private order flow</h3>
+        <p>Bundles are submitted privately through Flashbots and MEV-Share, including the Chainlink SVR oracle-update auctions.</p>
+      </div>
+      <div class="card">
+        <h3>Best-execution routing</h3>
+        <p>Collateral is sold across on-chain venues (Uniswap v3 and v4, Curve, aggregators), and we are integrating RFQ market-maker liquidity for large sizes.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>How a liquidation settles</h2>
+    <ol class="flow">
+      <li><div><strong>Detect</strong><span>We track health factors and oracle updates, and simulate every candidate against the state it will execute on.</span></div></li>
+      <li><div><strong>Borrow</strong><span>The debt asset is flash-borrowed for the length of the transaction.</span></div></li>
+      <li><div><strong>Liquidate</strong><span>The position is liquidated on the Aave v3 pool and the collateral is received by our contract.</span></div></li>
+      <li><div><strong>Sell</strong><span>The collateral is sold for the debt asset; sale amounts are set from the balance actually received.</span></div></li>
+      <li><div><strong>Repay or revert</strong><span>The flash loan is repaid and a minimum profit is enforced on-chain. Otherwise the transaction reverts and nothing settles.</span></div></li>
+    </ol>
+  </section>
+
+  <section>
+    <h2>Contracts</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Contract</th><th>Address</th><th>Role</th></tr></thead>
+        <tbody>
+          <tr><td>Liquidator</td><td><a href="https://etherscan.io/address/0xF76ec682dd8271788755117e83A1F681b84a43be"><code>0xF76ec682dd8271788755117e83A1F681b84a43be</code></a></td><td>Single-position liquidation and settlement</td></tr>
+          <tr><td>Batch liquidator</td><td><a href="https://etherscan.io/address/0x911b4d96779511ff47e2c1c2aa1c77085683e2e6"><code>0x911b4d96779511ff47e2c1c2aa1c77085683e2e6</code></a></td><td>Several positions in one transaction</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <h2>Principles</h2>
+    <div class="grid">
+      <div class="card"><h3>All or nothing</h3><p>Every operation is atomic. A failed sale or an unprofitable fill means a revert, not a loss.</p></div>
+      <div class="card"><h3>No user funds</h3><p>We never hold third-party deposits. Contracts only handle assets inside the liquidation itself.</p></div>
+      <div class="card"><h3>Simulate first</h3><p>Every transaction is simulated against the target state before it is submitted.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Contact</h2>
+    <div class="contact">
+      <a class="btn" href="mailto:info@craftlabs.it">info@craftlabs.it</a>
+      <span>For integrations, liquidity partnerships and RFQ access.</span>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">Craftlabs is an independent Italian studio building on-chain infrastructure.</div>
+</footer>
+</body>
+</html>
