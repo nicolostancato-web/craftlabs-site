@@ -3,148 +3,451 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Craftlabs Onchain — Liquidation infrastructure on Ethereum</title>
-<meta name="description" content="Craftlabs Onchain builds and operates atomic liquidation infrastructure for Aave v3 on Ethereum mainnet.">
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%230F1A2E'/></svg>">
+<title>Craftlabs Onchain</title>
+<meta name="description" content="Atomic liquidation infrastructure for Aave v3 on Ethereum. Detect, borrow, liquidate, sell, repay: one transaction, one block.">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%2305060F'/><rect x='22' y='22' width='24' height='24' rx='4' fill='%23FF8A3D'/><rect x='54' y='54' width='24' height='24' rx='4' fill='%235CE1E6'/></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #FAF6EE; --bg-soft: #F2EAD7; --surface: #FFFFFF; --ink: #0F1A2E; --ink-soft: #3B4658;
-    --muted: #6B7385; --rust: #C5421B; --navy: #1E3A5F; --line: #E5DAC1;
-    --serif: 'Fraunces', Georgia, serif; --sans: 'Inter', -apple-system, 'Segoe UI', sans-serif;
-    --mono: 'JetBrains Mono', ui-monospace, monospace;
-  }
-  @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) {
-      --bg: #0D1422; --bg-soft: #131C2E; --surface: #172236; --ink: #F2ECE0; --ink-soft: #C9C2B4;
-      --muted: #8E97A8; --rust: #E2683F; --navy: #8FB0D9; --line: #26324A;
-    }
-  }
-  :root[data-theme="dark"] {
-    --bg: #0D1422; --bg-soft: #131C2E; --surface: #172236; --ink: #F2ECE0; --ink-soft: #C9C2B4;
-    --muted: #8E97A8; --rust: #E2683F; --navy: #8FB0D9; --line: #26324A;
+    --bg: #05060F; --bg-2: #0A0D1A; --surface: #10152A; --line: #1A2038; --line-2: #283152;
+    --ink: #ECF0F7; --ink-2: #A7B1C8; --muted: #6A7494;
+    --heat: #FF8A3D; --heat-2: #FFB27A; --cold: #5CE1E6;
+    --display: 'Syne', 'Arial Black', sans-serif;
+    --body: 'Instrument Sans', 'Helvetica Neue', Arial, sans-serif;
+    --mono: 'JetBrains Mono', ui-monospace, 'SF Mono', monospace;
   }
   * { box-sizing: border-box; }
-  body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--sans); line-height: 1.6; }
-  a { color: var(--navy); }
-  a:focus-visible { outline: 2px solid var(--rust); outline-offset: 3px; }
-  .wrap { max-width: 980px; margin: 0 auto; padding: 0 24px; }
-  header { border-bottom: 1px solid var(--line); }
-  .bar { display: flex; justify-content: space-between; align-items: center; padding: 20px 0; }
-  .brand { font-family: var(--serif); font-weight: 700; font-size: 1.25rem; color: var(--ink); text-decoration: none; }
-  .brand span { color: var(--rust); }
-  .bar a.home { font-size: .9rem; color: var(--muted); text-decoration: none; }
-  .hero { padding: 88px 0 64px; display: grid; gap: 20px; }
-  .eyebrow { font-size: .78rem; letter-spacing: .14em; text-transform: uppercase; color: var(--rust); font-weight: 600; }
-  h1 { font-family: var(--serif); font-weight: 600; font-size: clamp(2.2rem, 5vw, 3.6rem); line-height: 1.08; margin: 0; text-wrap: balance; }
-  .lede { font-size: 1.15rem; color: var(--ink-soft); max-width: 62ch; margin: 0; }
-  section { padding: 56px 0; border-top: 1px solid var(--line); }
-  h2 { font-family: var(--serif); font-weight: 600; font-size: 1.7rem; margin: 0 0 24px; text-wrap: balance; }
-  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
-  .card { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 24px; }
-  .card h3 { font-size: 1.02rem; margin: 0 0 8px; }
-  .card p { margin: 0; color: var(--ink-soft); font-size: .96rem; }
-  .flow { display: grid; gap: 14px; counter-reset: step; }
-  .flow li { list-style: none; display: grid; grid-template-columns: 44px 1fr; gap: 14px; align-items: start; }
-  .flow li::before { counter-increment: step; content: counter(step); font-family: var(--mono); font-size: .85rem;
-    width: 34px; height: 34px; border-radius: 50%; border: 1px solid var(--rust); color: var(--rust);
-    display: grid; place-items: center; }
-  .flow { padding: 0; margin: 0; }
-  .flow strong { display: block; }
-  .flow span { color: var(--ink-soft); font-size: .96rem; }
-  .table-wrap { overflow-x: auto; }
-  table { width: 100%; border-collapse: collapse; font-size: .94rem; }
-  th, td { text-align: left; padding: 12px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
-  th { font-size: .78rem; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
-  code { font-family: var(--mono); font-size: .86rem; word-break: break-all; }
-  .contact { display: flex; flex-wrap: wrap; gap: 16px; align-items: center; }
-  .btn { display: inline-block; background: var(--ink); color: var(--bg); padding: 12px 22px; border-radius: 999px;
-    text-decoration: none; font-weight: 600; }
-  footer { padding: 40px 0 60px; color: var(--muted); font-size: .86rem; border-top: 1px solid var(--line); }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--body); line-height: 1.6; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+  a { color: inherit; }
+  a:focus-visible { outline: 2px solid var(--heat); outline-offset: 3px; border-radius: 4px; }
+  ::selection { background: var(--heat); color: var(--bg); }
+  body::before { content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 60; opacity: .05;
+    background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>"); }
+
+  /* the field lives behind the whole page */
+  #field { position: fixed; inset: 0; width: 100vw; height: 100vh; z-index: 0; display: block; }
+  .page { position: relative; z-index: 2; }
+  .wrap { max-width: 1180px; margin: 0 auto; padding: 0 28px; }
+
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 40; backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+    background: color-mix(in srgb, var(--bg) 60%, transparent); border-bottom: 1px solid color-mix(in srgb, var(--line) 70%, transparent); }
+  .nav-in { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+  .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; font-family: var(--display); font-weight: 700; font-size: 1.05rem; }
+  .brand-mark { width: 22px; height: 22px; position: relative; }
+  .brand-mark i { position: absolute; width: 11px; height: 11px; border-radius: 3px; }
+  .brand-mark i:first-child { left: 0; top: 0; background: var(--heat); }
+  .brand-mark i:last-child { right: 0; bottom: 0; background: var(--cold); }
+  .brand small { font-family: var(--mono); font-weight: 400; font-size: .72rem; color: var(--muted); margin-left: 4px; }
+  .nav-links { display: flex; gap: 28px; font-size: .9rem; color: var(--ink-2); }
+  .nav-links a { text-decoration: none; transition: color .2s; }
+  .nav-links a:hover { color: var(--ink); }
+  .nav-cta { font-family: var(--mono); font-size: .8rem; text-decoration: none; padding: 9px 16px; border: 1px solid var(--line-2); border-radius: 999px; transition: border-color .2s, background .2s; }
+  .nav-cta:hover { border-color: var(--heat); background: color-mix(in srgb, var(--heat) 10%, transparent); }
+
+  /* hero */
+  .hero { min-height: 100vh; display: flex; align-items: center; padding: 120px 0 90px; }
+  .hero > .wrap { width: 100%; }
+  .hero-in { max-width: 700px; }
+  .eyebrow { display: inline-flex; align-items: center; gap: 10px; font-family: var(--mono); font-size: .76rem; letter-spacing: .16em; text-transform: uppercase; color: var(--cold); }
+  .pulse { width: 8px; height: 8px; border-radius: 50%; background: var(--heat); animation: pulse 2s infinite; }
+  @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(255,138,61,.7); } 70% { box-shadow: 0 0 0 10px rgba(255,138,61,0); } 100% { box-shadow: 0 0 0 0 rgba(255,138,61,0); } }
+  h1 { font-family: var(--display); font-weight: 800; font-size: clamp(2.6rem, 6vw, 5.3rem); line-height: .95; letter-spacing: -.03em; margin: 22px 0 28px; text-wrap: balance; }
+  h1 .heat { color: var(--heat); text-shadow: 0 0 40px rgba(255,138,61,.35); }
+  .lede { font-size: 1.18rem; color: var(--ink-2); max-width: 52ch; margin: 0 0 38px; }
+  .lede b { color: var(--ink); font-weight: 600; }
+  .hero-actions { display: flex; flex-wrap: wrap; gap: 14px; }
+  .btn { display: inline-flex; align-items: center; gap: 10px; padding: 15px 26px; border-radius: 999px; font-weight: 600; text-decoration: none; font-size: .95rem; transition: transform .2s, box-shadow .2s, border-color .2s; }
+  .btn-heat { background: var(--heat); color: #170A02; box-shadow: 0 10px 40px -12px rgba(255,138,61,.8); }
+  .btn-heat:hover { transform: translateY(-2px); box-shadow: 0 18px 54px -12px var(--heat); }
+  .btn-ghost { border: 1px solid var(--line-2); color: var(--ink); background: color-mix(in srgb, var(--bg) 50%, transparent); }
+  .btn-ghost:hover { border-color: var(--cold); }
+  .head-block { margin-top: 46px; display: inline-flex; gap: 16px; align-items: center; font-family: var(--mono); font-size: .8rem; color: var(--muted);
+    padding: 10px 16px; border: 1px solid var(--line); border-radius: 10px; background: color-mix(in srgb, var(--bg-2) 75%, transparent); }
+  .head-block b { color: var(--cold); font-weight: 500; font-variant-numeric: tabular-nums; }
+  .head-block[hidden] { display: none; }
+  .scroll-hint { position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%); font-family: var(--mono); font-size: .7rem; letter-spacing: .2em; color: var(--muted); text-transform: uppercase; }
+  .scroll-hint::after { content: ""; display: block; width: 1px; height: 36px; margin: 10px auto 0; background: linear-gradient(var(--cold), transparent); animation: drip 2s infinite; }
+  @keyframes drip { 0% { transform: scaleY(0); transform-origin: top; } 50% { transform: scaleY(1); transform-origin: top; } 51% { transform-origin: bottom; } 100% { transform: scaleY(0); transform-origin: bottom; } }
+
+  .reveal { opacity: 0; transform: translateY(18px); animation: rise .9s cubic-bezier(.2,.7,.2,1) forwards; }
+  .d1 { animation-delay: .2s; } .d2 { animation-delay: .4s; } .d3 { animation-delay: .6s; } .d4 { animation-delay: .8s; } .d5 { animation-delay: 1s; }
+  @keyframes rise { to { opacity: 1; transform: none; } }
+
+  /* statement band */
+  .statement { padding: 140px 0; }
+  .statement p { font-family: var(--display); font-weight: 700; font-size: clamp(1.8rem, 4.2vw, 3.6rem); line-height: 1.12; letter-spacing: -.02em; margin: 0; max-width: 22ch; text-wrap: balance; }
+  .statement p span { color: var(--muted); }
+  .statement p em { font-style: normal; color: var(--cold); }
+
+  section { padding: 120px 0; }
+  .panel { background: color-mix(in srgb, var(--bg) 82%, transparent); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); border-top: 1px solid var(--line); }
+  .sec-head { display: grid; grid-template-columns: 220px 1fr; gap: 40px; margin-bottom: 56px; align-items: start; }
+  .sec-tag { font-family: var(--mono); font-size: .76rem; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); padding-top: 12px; border-top: 1px solid var(--line-2); }
+  h2 { font-family: var(--display); font-weight: 700; font-size: clamp(1.9rem, 3.8vw, 3.2rem); line-height: 1.04; letter-spacing: -.02em; margin: 0; text-wrap: balance; }
+  h2 em { font-style: normal; color: var(--cold); }
+
+  .caps { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 18px; overflow: hidden; }
+  .cap { position: relative; background: var(--bg-2); padding: 40px 36px 42px; overflow: hidden; transform-style: preserve-3d; transition: background .35s; }
+  .cap::before { content: ""; position: absolute; width: 380px; height: 380px; border-radius: 50%; left: var(--mx, 50%); top: var(--my, 50%); transform: translate(-50%, -50%);
+    background: radial-gradient(circle, rgba(92,225,230,.14), transparent 65%); opacity: 0; transition: opacity .35s; pointer-events: none; }
+  .cap:hover::before { opacity: 1; }
+  .cap-k { font-family: var(--mono); font-size: .74rem; color: var(--heat-2); letter-spacing: .1em; }
+  .cap h3 { font-family: var(--display); font-weight: 700; font-size: 1.45rem; margin: 14px 0 12px; letter-spacing: -.01em; }
+  .cap p { margin: 0; color: var(--ink-2); max-width: 46ch; }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
+  .chip { font-family: var(--mono); font-size: .72rem; padding: 5px 10px; border-radius: 6px; border: 1px solid var(--line-2); color: var(--ink-2); }
+
+  .anatomy { border: 1px solid var(--line); border-radius: 18px; background: linear-gradient(180deg, var(--bg-2), var(--bg)); padding: 48px 40px 40px; overflow: hidden; }
+  .block-frame { font-family: var(--mono); font-size: .76rem; color: var(--muted); display: flex; justify-content: space-between; margin-bottom: 34px; }
+  .block-frame span:last-child { color: var(--cold); }
+  .track { position: relative; display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; }
+  .track::before { content: ""; position: absolute; left: 0; right: 0; top: 27px; height: 2px; background: var(--line-2); }
+  .runner { position: absolute; top: 22px; left: 0; width: 12px; height: 12px; border-radius: 50%; background: var(--heat); box-shadow: 0 0 18px var(--heat), 0 0 40px var(--heat); animation: run 6s cubic-bezier(.55,.05,.45,.95) infinite; }
+  @keyframes run { 0% { left: 0; opacity: 0; } 6% { opacity: 1; } 88% { left: calc(100% - 12px); opacity: 1; } 100% { left: calc(100% - 12px); opacity: 0; } }
+  .step { position: relative; z-index: 1; }
+  .node { width: 56px; height: 56px; border-radius: 14px; display: grid; place-items: center; background: var(--surface); border: 1px solid var(--line-2); font-family: var(--mono); font-size: .9rem; color: var(--ink-2); margin-bottom: 18px; transition: border-color .3s, color .3s, box-shadow .3s; }
+  .step.lit .node { border-color: var(--heat); color: var(--heat); box-shadow: 0 0 0 4px rgba(255,138,61,.14); }
+  .step h4 { margin: 0 0 6px; font-size: 1.02rem; font-weight: 600; }
+  .step p { margin: 0; font-size: .9rem; color: var(--ink-2); }
+  .outcome { margin-top: 38px; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .out { border-radius: 12px; padding: 18px 20px; border: 1px solid var(--line); font-size: .92rem; color: var(--ink-2); display: flex; gap: 14px; align-items: flex-start; }
+  .out b { font-family: var(--mono); font-weight: 500; font-size: .76rem; letter-spacing: .08em; text-transform: uppercase; padding: 3px 8px; border-radius: 5px; white-space: nowrap; }
+  .out.ok b { background: rgba(92,225,230,.14); color: var(--cold); }
+  .out.rv b { background: rgba(255,138,61,.14); color: var(--heat-2); }
+
+  .contracts { border: 1px solid var(--line); border-radius: 18px; overflow: hidden; }
+  .contract { display: grid; grid-template-columns: 240px 1fr auto; gap: 24px; align-items: center; padding: 26px 30px; border-bottom: 1px solid var(--line); background: var(--bg-2); transition: background .25s; text-decoration: none; }
+  .contract:last-child { border-bottom: 0; }
+  .contract:hover { background: var(--surface); }
+  .contract .name { font-weight: 600; }
+  .contract .name small { display: block; color: var(--muted); font-weight: 400; font-size: .86rem; }
+  .addr { font-family: var(--mono); font-size: .86rem; color: var(--cold); word-break: break-all; }
+  .arrow { font-family: var(--mono); color: var(--muted); transition: transform .25s, color .25s; }
+  .contract:hover .arrow { transform: translate(3px, -3px); color: var(--heat); }
+
+  .principles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .pr { padding: 32px 28px; border-radius: 16px; border: 1px solid var(--line); background: var(--bg-2); transition: transform .3s, border-color .3s; }
+  .pr:hover { transform: translateY(-4px); border-color: var(--line-2); }
+  .pr .num { font-family: var(--mono); font-size: .76rem; color: var(--heat-2); }
+  .pr h3 { font-family: var(--display); font-size: 1.3rem; margin: 14px 0 10px; }
+  .pr p { margin: 0; color: var(--ink-2); font-size: .95rem; }
+
+  .contact { border-radius: 24px; padding: 80px 56px; position: relative; overflow: hidden; border: 1px solid var(--line-2);
+    background: radial-gradient(ellipse 60% 80% at 100% 0%, rgba(255,138,61,.18), transparent 60%), radial-gradient(ellipse 50% 70% at 0% 100%, rgba(92,225,230,.12), transparent 60%), var(--bg-2); }
+  .contact h2 { font-size: clamp(2.2rem, 5vw, 4rem); max-width: 15ch; }
+  .contact p { color: var(--ink-2); max-width: 52ch; margin: 22px 0 36px; font-size: 1.1rem; }
+  .mail { font-family: var(--mono); font-size: clamp(1rem, 2.4vw, 1.5rem); text-decoration: none; border-bottom: 1px solid var(--heat); padding-bottom: 4px; }
+  .mail:hover { color: var(--heat-2); }
+
+  footer { padding: 48px 0 60px; color: var(--muted); font-size: .86rem; background: var(--bg); }
+  .foot { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 16px; border-top: 1px solid var(--line); padding-top: 28px; }
+  .foot span:last-child { font-family: var(--mono); font-size: .78rem; }
+
+  .sr { opacity: 0; transform: translateY(28px); transition: opacity .9s cubic-bezier(.2,.7,.2,1), transform .9s cubic-bezier(.2,.7,.2,1); }
+  .sr.in { opacity: 1; transform: none; }
+
+  @media (max-width: 900px) {
+    .nav-links { display: none; }
+    .sec-head { grid-template-columns: 1fr; gap: 16px; }
+    .caps, .outcome, .principles { grid-template-columns: 1fr; }
+    .track { grid-template-columns: 1fr; gap: 26px; }
+    .track::before, .runner { display: none; }
+    .contract { grid-template-columns: 1fr; gap: 8px; }
+    .arrow { display: none; }
+    .contact { padding: 52px 28px; }
+    section, .statement { padding: 90px 0; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+    .reveal, .sr { opacity: 1; transform: none; }
+  }
 </style>
 </head>
 <body>
-<header>
-  <div class="wrap bar">
-    <a class="brand" href="/">Craftlabs<span> Onchain</span></a>
+<canvas id="field" aria-hidden="true"></canvas>
+
+<nav>
+  <div class="wrap nav-in">
+    <a class="brand" href="/" aria-label="Craftlabs Onchain home"><span class="brand-mark" aria-hidden="true"><i></i><i></i></span>Craftlabs<small>/onchain</small></a>
+    <div class="nav-links">
+      <a href="#run">What we run</a>
+      <a href="#anatomy">How it settles</a>
+      <a href="#contracts">Contracts</a>
+      <a href="#principles">Principles</a>
+    </div>
+    <a class="nav-cta" href="mailto:info@craftlabs.it">info@craftlabs.it</a>
   </div>
-</header>
+</nav>
 
-<main class="wrap">
-  <div class="hero">
-    <div class="eyebrow">Ethereum mainnet · Aave v3</div>
-    <h1>Liquidation infrastructure that settles in a single transaction.</h1>
-    <p class="lede">We build and operate the contracts and off-chain systems that keep Aave v3 positions healthy: unhealthy debt is repaid, collateral is sold and the loan is closed atomically, or nothing happens at all.</p>
+<div class="page">
+  <header class="hero">
+    <div class="wrap">
+      <div class="hero-in">
+        <div class="eyebrow reveal d1"><span class="pulse"></span>Liquidation infrastructure · Aave v3 · Ethereum</div>
+        <h1 class="reveal d2">Bad debt gets <span class="heat">one block</span> to live.</h1>
+        <p class="lede reveal d3">When a position breaks, we close it. Detect, borrow, liquidate, sell, repay — <b>one transaction, one block</b>. If it can't settle clean, it doesn't settle at all.</p>
+        <div class="hero-actions reveal d4">
+          <a class="btn btn-heat" href="#anatomy">Watch it settle <span aria-hidden="true">→</span></a>
+          <a class="btn btn-ghost" href="#contracts">Read the contracts</a>
+        </div>
+        <div class="head-block reveal d5" id="head" hidden><span>Ethereum head</span><b id="head-num">—</b><span id="head-age"></span></div>
+      </div>
+    </div>
+    <div class="scroll-hint" aria-hidden="true">scroll</div>
+  </header>
+
+  <div class="statement">
+    <div class="wrap sr">
+      <p><span>Markets move in seconds.</span> Lending protocols stay solvent only if someone closes the gap <em>in the same block</em>. That is the only thing we build for.</p>
+    </div>
   </div>
 
-  <section>
-    <h2>What we run</h2>
-    <div class="grid">
-      <div class="card">
-        <h3>Atomic liquidations</h3>
-        <p>Flash-funded repayment, collateral seizure and collateral sale inside one transaction. If any step fails, the whole transaction reverts.</p>
+  <section id="run" class="panel">
+    <div class="wrap">
+      <div class="sec-head sr">
+        <div class="sec-tag">01 — What we run</div>
+        <h2>Four systems. One job: <em>close the position clean</em>.</h2>
       </div>
-      <div class="card">
-        <h3>Batched execution</h3>
-        <p>Several positions that become liquidatable in the same block are handled together in one transaction, with per-position isolation.</p>
-      </div>
-      <div class="card">
-        <h3>Private order flow</h3>
-        <p>Bundles are submitted privately through Flashbots and MEV-Share, including the Chainlink SVR oracle-update auctions.</p>
-      </div>
-      <div class="card">
-        <h3>Best-execution routing</h3>
-        <p>Collateral is sold across on-chain venues (Uniswap v3 and v4, Curve, aggregators), and we are integrating RFQ market-maker liquidity for large sizes.</p>
+      <div class="caps sr">
+        <article class="cap">
+          <span class="cap-k">ATOMIC</span>
+          <h3>Flash-funded liquidations</h3>
+          <p>Repayment, seizure and sale happen inside one transaction, funded by a flash loan and repaid before the block closes. No inventory. No exposure left behind.</p>
+          <div class="chips"><span class="chip">flash loans</span><span class="chip">zero inventory</span></div>
+        </article>
+        <article class="cap">
+          <span class="cap-k">BATCHED</span>
+          <h3>Many positions, one shot</h3>
+          <p>When a price move tips several positions at once, we take them together — each isolated, so one failure never sinks the batch.</p>
+          <div class="chips"><span class="chip">per-position isolation</span></div>
+        </article>
+        <article class="cap">
+          <span class="cap-k">PRIVATE</span>
+          <h3>Order flow off the public mempool</h3>
+          <p>Bundles go out privately through Flashbots and MEV-Share, including the Chainlink SVR oracle-update auctions. Nothing to front-run.</p>
+          <div class="chips"><span class="chip">Flashbots</span><span class="chip">MEV-Share</span><span class="chip">Chainlink SVR</span></div>
+        </article>
+        <article class="cap">
+          <span class="cap-k">ROUTED</span>
+          <h3>Size, split across venues</h3>
+          <p>Large collateral is never dumped into a single pool. It is sliced across pools and venues for best execution — and RFQ market-maker liquidity is being wired in for size.</p>
+          <div class="chips"><span class="chip">Uniswap v3 / v4</span><span class="chip">Curve</span><span class="chip">aggregators</span><span class="chip">RFQ</span></div>
+        </article>
       </div>
     </div>
   </section>
 
-  <section>
-    <h2>How a liquidation settles</h2>
-    <ol class="flow">
-      <li><div><strong>Detect</strong><span>We track health factors and oracle updates, and simulate every candidate against the state it will execute on.</span></div></li>
-      <li><div><strong>Borrow</strong><span>The debt asset is flash-borrowed for the length of the transaction.</span></div></li>
-      <li><div><strong>Liquidate</strong><span>The position is liquidated on the Aave v3 pool and the collateral is received by our contract.</span></div></li>
-      <li><div><strong>Sell</strong><span>The collateral is sold for the debt asset; sale amounts are set from the balance actually received.</span></div></li>
-      <li><div><strong>Repay or revert</strong><span>The flash loan is repaid and a minimum profit is enforced on-chain. Otherwise the transaction reverts and nothing settles.</span></div></li>
-    </ol>
-  </section>
-
-  <section>
-    <h2>Contracts</h2>
-    <div class="table-wrap">
-      <table>
-        <thead><tr><th>Contract</th><th>Address</th><th>Role</th></tr></thead>
-        <tbody>
-          <tr><td>Liquidator</td><td><a href="https://etherscan.io/address/0xF76ec682dd8271788755117e83A1F681b84a43be"><code>0xF76ec682dd8271788755117e83A1F681b84a43be</code></a></td><td>Single-position liquidation and settlement</td></tr>
-          <tr><td>Batch liquidator</td><td><a href="https://etherscan.io/address/0x911b4d96779511ff47e2c1c2aa1c77085683e2e6"><code>0x911b4d96779511ff47e2c1c2aa1c77085683e2e6</code></a></td><td>Several positions in one transaction</td></tr>
-        </tbody>
-      </table>
+  <section id="anatomy" class="panel">
+    <div class="wrap">
+      <div class="sec-head sr">
+        <div class="sec-tag">02 — How it settles</div>
+        <h2>Five steps. <em>One transaction.</em> No half states.</h2>
+      </div>
+      <div class="anatomy sr">
+        <div class="block-frame"><span>tx · single block</span><span id="anat-label">atomic</span></div>
+        <div class="track">
+          <span class="runner" aria-hidden="true"></span>
+          <div class="step"><div class="node">01</div><h4>Detect</h4><p>Health factors and oracle updates are tracked; every candidate is simulated against the state it will hit.</p></div>
+          <div class="step"><div class="node">02</div><h4>Borrow</h4><p>The debt asset is flash-borrowed for the length of the transaction.</p></div>
+          <div class="step"><div class="node">03</div><h4>Liquidate</h4><p>The position is liquidated on Aave v3 and the collateral lands in our contract.</p></div>
+          <div class="step"><div class="node">04</div><h4>Sell</h4><p>Collateral is sold for the debt asset, sized from the balance actually received.</p></div>
+          <div class="step"><div class="node">05</div><h4>Repay</h4><p>The flash loan is repaid and a minimum profit is enforced on-chain.</p></div>
+        </div>
+        <div class="outcome">
+          <div class="out ok"><b>Settles</b><span>Debt repaid, protocol healthier, loan closed — in the same block.</span></div>
+          <div class="out rv"><b>Reverts</b><span>Any failed step or unprofitable fill undoes everything. Nothing settles. Nothing is left half-done.</span></div>
+        </div>
+      </div>
     </div>
   </section>
 
-  <section>
-    <h2>Principles</h2>
-    <div class="grid">
-      <div class="card"><h3>All or nothing</h3><p>Every operation is atomic. A failed sale or an unprofitable fill means a revert, not a loss.</p></div>
-      <div class="card"><h3>No user funds</h3><p>We never hold third-party deposits. Contracts only handle assets inside the liquidation itself.</p></div>
-      <div class="card"><h3>Simulate first</h3><p>Every transaction is simulated against the target state before it is submitted.</p></div>
+  <section id="contracts" class="panel">
+    <div class="wrap">
+      <div class="sec-head sr">
+        <div class="sec-tag">03 — Contracts</div>
+        <h2>On mainnet. <em>Don't trust us — verify.</em></h2>
+      </div>
+      <div class="contracts sr">
+        <a class="contract" href="https://etherscan.io/address/0xF76ec682dd8271788755117e83A1F681b84a43be" target="_blank" rel="noopener">
+          <span class="name">Liquidator<small>Single-position liquidation and settlement</small></span>
+          <span class="addr">0xF76ec682dd8271788755117e83A1F681b84a43be</span><span class="arrow" aria-hidden="true">↗</span>
+        </a>
+        <a class="contract" href="https://etherscan.io/address/0x911b4d96779511ff47e2c1c2aa1c77085683e2e6" target="_blank" rel="noopener">
+          <span class="name">Batch liquidator<small>Several positions in one transaction</small></span>
+          <span class="addr">0x911b4d96779511ff47e2c1c2aa1c77085683e2e6</span><span class="arrow" aria-hidden="true">↗</span>
+        </a>
+      </div>
     </div>
   </section>
 
-  <section>
-    <h2>Contact</h2>
-    <div class="contact">
-      <a class="btn" href="mailto:info@craftlabs.it">info@craftlabs.it</a>
-      <span>For integrations, liquidity partnerships and RFQ access.</span>
+  <section id="principles" class="panel">
+    <div class="wrap">
+      <div class="sec-head sr">
+        <div class="sec-tag">04 — Principles</div>
+        <h2>Rules the code <em>enforces</em>. Not promises.</h2>
+      </div>
+      <div class="principles sr">
+        <div class="pr"><span class="num">/01</span><h3>All or nothing</h3><p>Every operation is atomic. A failed sale or an unprofitable fill is a revert, never a loss.</p></div>
+        <div class="pr"><span class="num">/02</span><h3>No user funds</h3><p>We never hold third-party deposits. Our contracts only touch assets inside the liquidation itself.</p></div>
+        <div class="pr"><span class="num">/03</span><h3>Simulate first</h3><p>Every transaction is simulated against its target state before a single byte is sent.</p></div>
+      </div>
     </div>
   </section>
-</main>
 
-<footer>
-  <div class="wrap">Craftlabs is an independent Italian studio building on-chain infrastructure.</div>
-</footer>
+  <section id="contact" class="panel">
+    <div class="wrap">
+      <div class="contact sr">
+        <div class="sec-tag" style="border:0;padding:0;margin-bottom:18px">05 — Contact</div>
+        <h2>Bring liquidity. <em>We bring execution.</em></h2>
+        <p>Market makers, venues and teams building on Aave v3: if you want flow from an execution-obsessed liquidator, talk to us.</p>
+        <a class="mail" href="mailto:info@craftlabs.it">info@craftlabs.it</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap foot">
+      <span>Craftlabs — an independent Italian studio building on-chain infrastructure.</span>
+      <span>Ethereum mainnet</span>
+    </div>
+  </footer>
+</div>
+
+<script>
+(() => {
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const cv = document.getElementById('field'), ctx = cv.getContext('2d');
+  let W, H, dpr, N, P = [], cube = [];
+  const mouse = { x: -9999, y: -9999, tx: 0, ty: 0, sx: 0, sy: 0 };
+  let scrollY = 0;
+
+  // value-noise for flowing strands
+  const perm = new Uint8Array(512); for (let i = 0; i < 256; i++) perm[i] = i;
+  for (let i = 255; i > 0; i--) { const j = (Math.random() * (i + 1)) | 0; [perm[i], perm[j]] = [perm[j], perm[i]]; }
+  for (let i = 0; i < 256; i++) perm[i + 256] = perm[i];
+  const fade = t => t * t * (3 - 2 * t);
+  const rnd = (x, y) => perm[(perm[x & 255] + y) & 511] / 255;
+  function noise(x, y) { const xi = Math.floor(x), yi = Math.floor(y), xf = x - xi, yf = y - yi;
+    const a = rnd(xi, yi), b = rnd(xi + 1, yi), c = rnd(xi, yi + 1), d = rnd(xi + 1, yi + 1), u = fade(xf), v = fade(yf);
+    return a + (b - a) * u + (c - a) * v + (a - b - c + d) * u * v; }
+
+  function center() { return { x: W > 900 ? W * .75 : W * .5, y: H * (W > 900 ? .5 : .36) }; }
+  function resize() {
+    dpr = Math.min(devicePixelRatio || 1, 2); W = innerWidth; H = innerHeight;
+    cv.width = W * dpr; cv.height = H * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    N = Math.round(Math.min(3200, W * H / 420));
+    P = []; for (let i = 0; i < N; i++) P.push(spawn(true));
+    // cube made of points: edges sampled
+    cube = []; const v = [-1, 1];
+    const corners = []; v.forEach(x => v.forEach(y => v.forEach(z => corners.push([x, y, z]))));
+    for (let i = 0; i < 8; i++) for (let j = i + 1; j < 8; j++) {
+      const a = corners[i], b = corners[j], diff = Math.abs(a[0]-b[0]) + Math.abs(a[1]-b[1]) + Math.abs(a[2]-b[2]);
+      if (diff !== 2) continue;
+      for (let k = 0; k <= 22; k++) { const t = k / 22; cube.push([a[0] + (b[0]-a[0]) * t, a[1] + (b[1]-a[1]) * t, a[2] + (b[2]-a[2]) * t, 1]); }
+    }
+    for (let i = 0; i < 420; i++) { // inner dust = transactions inside the block
+      cube.push([(Math.random()*2-1)*.85, (Math.random()*2-1)*.85, (Math.random()*2-1)*.85, 0]);
+    }
+  }
+  function spawn(anywhere) {
+    return { x: anywhere ? Math.random() * W : -20 - Math.random() * 120, y: Math.random() * H,
+      s: .6 + Math.random() * 1.5, a: .25 + Math.random() * .6, hot: Math.random() < .035, life: 0 };
+  }
+  let t = 0, rot = 0;
+  function frame() {
+    t += 1;
+    mouse.sx += (mouse.tx - mouse.sx) * .05; mouse.sy += (mouse.ty - mouse.sy) * .05;
+    const par = Math.min(1, scrollY / H);
+    const c = center(); c.x += mouse.sx * 26; c.y += mouse.sy * 18 - scrollY * .25;
+    const R = Math.min(W, H) * (W > 900 ? .2 : .22) * (1 - par * .25);
+
+    ctx.globalCompositeOperation = 'source-over';
+    ctx.fillStyle = 'rgba(5,6,15,0.075)'; ctx.fillRect(0, 0, W, H);
+    ctx.globalCompositeOperation = 'lighter';
+
+    // flowing strands converge toward the block
+    for (const p of P) {
+      const n = noise(p.x * .0035, p.y * .0035 + t * .004);
+      const ang = (n - .5) * 2.4;
+      let vx = Math.cos(ang) * 1.5 + 1.1, vy = Math.sin(ang) * 1.5;
+      const dx = c.x - p.x, dy = c.y - p.y, d = Math.hypot(dx, dy) || 1;
+      if (p.x < c.x) { const pull = Math.min(1, 220 / d) * .9; vx += dx / d * pull; vy += dy / d * pull * 1.3; }
+      // mouse repels
+      const mx = p.x - mouse.x, my = p.y - mouse.y, md = Math.hypot(mx, my);
+      if (md < 130) { const f = (130 - md) / 130 * 3.2; vx += mx / (md || 1) * f; vy += my / (md || 1) * f; }
+      const ox = p.x, oy = p.y; p.x += vx; p.y += vy; p.life++;
+      const inBlock = Math.abs(p.x - c.x) < R * .9 && Math.abs(p.y - c.y) < R * .9;
+      ctx.strokeStyle = p.hot ? `rgba(255,138,61,${p.a * .8})` : `rgba(92,225,230,${p.a * .32})`;
+      ctx.lineWidth = p.s * .6;
+      ctx.beginPath(); ctx.moveTo(ox, oy); ctx.lineTo(p.x, p.y); ctx.stroke();
+      if (inBlock || p.x > W + 20 || p.y < -40 || p.y > H + 40 || p.life > 900) Object.assign(p, spawn(false));
+    }
+
+    // the block: rotating point-cube that tilts toward the cursor
+    rot += .0045;
+    const ay = rot + mouse.sx * .6, ax = .5 + mouse.sy * .45 + par * .6;
+    const cy = Math.cos(ay), sy = Math.sin(ay), cx = Math.cos(ax), sx = Math.sin(ax);
+    for (const q of cube) {
+      let [x, y, z, edge] = q;
+      if (!edge) { x += Math.sin(t * .02 + y * 5) * .02; }
+      const x1 = x * cy - z * sy, z1 = x * sy + z * cy;
+      const y1 = y * cx - z1 * sx, z2 = y * sx + z1 * cx;
+      const persp = 7 / (7 + z2), px = c.x + x1 * R * persp, py = c.y + y1 * R * persp;
+      const depth = (z2 + 1.8) / 3.6;
+      ctx.fillStyle = edge ? `rgba(220,248,250,${.35 + .55 * (1 - depth)})` : `rgba(92,225,230,${.18 + .3 * (1 - depth)})`;
+      const s = edge ? 1.8 * persp : 1.1 * persp;
+      ctx.fillRect(px - s / 2, py - s / 2, s, s);
+    }
+    // core glow
+    const g = ctx.createRadialGradient(c.x, c.y, 0, c.x, c.y, R * 1.6);
+    g.addColorStop(0, 'rgba(255,138,61,0.10)'); g.addColorStop(.5, 'rgba(92,225,230,0.05)'); g.addColorStop(1, 'rgba(0,0,0,0)');
+    ctx.fillStyle = g; ctx.fillRect(c.x - R * 1.6, c.y - R * 1.6, R * 3.2, R * 3.2);
+    ctx.globalCompositeOperation = 'source-over';
+    if (!reduce) requestAnimationFrame(frame);
+  }
+  resize(); addEventListener('resize', resize);
+  addEventListener('pointermove', e => { mouse.x = e.clientX; mouse.y = e.clientY; mouse.tx = e.clientX / W * 2 - 1; mouse.ty = e.clientY / H * 2 - 1; });
+  addEventListener('pointerleave', () => { mouse.x = mouse.y = -9999; });
+  addEventListener('scroll', () => { scrollY = window.scrollY; }, { passive: true });
+  if (reduce) { for (let i = 0; i < 60; i++) frame(); } else requestAnimationFrame(frame);
+
+  // real Ethereum head — read-only public RPC; hidden if unreachable (no fake numbers)
+  const head = document.getElementById('head'), num = document.getElementById('head-num'), age = document.getElementById('head-age');
+  let lastTs = 0;
+  async function readHead() {
+    try {
+      const r = await fetch('https://ethereum-rpc.publicnode.com', { method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ jsonrpc: '2.0', id: 1, method: 'eth_getBlockByNumber', params: ['latest', false] }) });
+      const j = await r.json(); if (!j.result) return;
+      num.textContent = '#' + parseInt(j.result.number, 16).toLocaleString('en-US');
+      lastTs = parseInt(j.result.timestamp, 16) * 1000; head.hidden = false;
+    } catch (e) {}
+  }
+  setInterval(() => { if (lastTs) age.textContent = Math.max(0, Math.round((Date.now() - lastTs) / 1000)) + 's ago'; }, 1000);
+  readHead(); setInterval(readHead, 12000);
+
+  // anatomy lights
+  const steps = [...document.querySelectorAll('.step')], label = document.getElementById('anat-label');
+  if (!reduce) { const start = performance.now();
+    (function loop(now) { const p = ((now - start) % 6000) / 6000, i = Math.floor(Math.min(.999, p / .88) * steps.length);
+      steps.forEach((s, k) => s.classList.toggle('lit', k <= i && p < .97)); label.textContent = p > .88 ? 'settled ✓' : 'atomic';
+      requestAnimationFrame(loop); })(start);
+  } else steps.forEach(s => s.classList.add('lit'));
+
+  // card glow + tilt
+  document.querySelectorAll('.cap').forEach(c => {
+    c.addEventListener('pointermove', e => { const r = c.getBoundingClientRect(), x = e.clientX - r.left, y = e.clientY - r.top;
+      c.style.setProperty('--mx', x + 'px'); c.style.setProperty('--my', y + 'px');
+      if (!reduce) c.style.transform = `perspective(900px) rotateX(${(y / r.height - .5) * -4}deg) rotateY(${(x / r.width - .5) * 4}deg)`; });
+    c.addEventListener('pointerleave', () => { c.style.transform = ''; });
+  });
+
+  const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: .12 });
+  document.querySelectorAll('.sr').forEach(el => io.observe(el));
+})();
+</script>
 </body>
 </html>
