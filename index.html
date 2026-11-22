@@ -175,7 +175,7 @@
     <div class="nav-links">
       <a href="#run">What we run</a>
       <a href="#anatomy">How it settles</a>
-      <a href="#contracts">Contracts</a>
+      <a href="#partners">Partners</a>
       <a href="#principles">Principles</a>
     </div>
     <a class="nav-cta" href="mailto:info@craftlabs.it">info@craftlabs.it</a>
@@ -188,10 +188,10 @@
       <div class="hero-in">
         <div class="eyebrow reveal d1"><span class="pulse"></span>Liquidation infrastructure · Aave v3 · Ethereum</div>
         <h1 class="reveal d2">Bad debt gets <span class="heat">one block</span> to live.</h1>
-        <p class="lede reveal d3">When a position breaks, we close it. Detect, borrow, liquidate, sell, repay — <b>one transaction, one block</b>. If it can't settle clean, it doesn't settle at all.</p>
+        <p class="lede reveal d3">When a position breaks, we close it — <b>atomically, in a single block</b>. Purpose-built execution for the moments when markets move fastest. If it can't settle clean, it doesn't settle at all.</p>
         <div class="hero-actions reveal d4">
           <a class="btn btn-heat" href="#anatomy">Watch it settle <span aria-hidden="true">→</span></a>
-          <a class="btn btn-ghost" href="#contracts">Read the contracts</a>
+          <a class="btn btn-ghost" href="#partners">Work with us</a>
         </div>
         <div class="head-block reveal d5" id="head" hidden><span>Ethereum head</span><b id="head-num">—</b><span id="head-age"></span></div>
       </div>
@@ -214,27 +214,23 @@
       <div class="caps sr">
         <article class="cap">
           <span class="cap-k">ATOMIC</span>
-          <h3>Flash-funded liquidations</h3>
-          <p>Repayment, seizure and sale happen inside one transaction, funded by a flash loan and repaid before the block closes. No inventory. No exposure left behind.</p>
-          <div class="chips"><span class="chip">flash loans</span><span class="chip">zero inventory</span></div>
+          <h3>Atomic by design</h3>
+          <p>Every operation completes inside a single transaction, or not at all. No positions carried, no exposure left behind when the block closes.</p>
         </article>
         <article class="cap">
-          <span class="cap-k">BATCHED</span>
-          <h3>Many positions, one shot</h3>
-          <p>When a price move tips several positions at once, we take them together — each isolated, so one failure never sinks the batch.</p>
-          <div class="chips"><span class="chip">per-position isolation</span></div>
+          <span class="cap-k">RESILIENT</span>
+          <h3>Built for volatility</h3>
+          <p>Our systems are designed for the worst minutes of the market — when prices gap, liquidity thins and everything happens at once.</p>
         </article>
         <article class="cap">
           <span class="cap-k">PRIVATE</span>
-          <h3>Order flow off the public mempool</h3>
-          <p>Bundles go out privately through Flashbots and MEV-Share, including the Chainlink SVR oracle-update auctions. Nothing to front-run.</p>
-          <div class="chips"><span class="chip">Flashbots</span><span class="chip">MEV-Share</span><span class="chip">Chainlink SVR</span></div>
+          <h3>Private execution</h3>
+          <p>Our orders never touch the public mempool. Nothing to copy, nothing to front-run.</p>
         </article>
         <article class="cap">
-          <span class="cap-k">ROUTED</span>
-          <h3>Size, split across venues</h3>
-          <p>Large collateral is never dumped into a single pool. It is sliced across pools and venues for best execution — and RFQ market-maker liquidity is being wired in for size.</p>
-          <div class="chips"><span class="chip">Uniswap v3 / v4</span><span class="chip">Curve</span><span class="chip">aggregators</span><span class="chip">RFQ</span></div>
+          <span class="cap-k">LIQUIDITY</span>
+          <h3>Execution at size</h3>
+          <p>We move meaningful size in volatile conditions, and we work with market makers to do it with minimal market impact.</p>
         </article>
       </div>
     </div>
@@ -250,11 +246,11 @@
         <div class="block-frame"><span>tx · single block</span><span id="anat-label">atomic</span></div>
         <div class="track">
           <span class="runner" aria-hidden="true"></span>
-          <div class="step"><div class="node">01</div><h4>Detect</h4><p>Health factors and oracle updates are tracked; every candidate is simulated against the state it will hit.</p></div>
-          <div class="step"><div class="node">02</div><h4>Borrow</h4><p>The debt asset is flash-borrowed for the length of the transaction.</p></div>
-          <div class="step"><div class="node">03</div><h4>Liquidate</h4><p>The position is liquidated on Aave v3 and the collateral lands in our contract.</p></div>
-          <div class="step"><div class="node">04</div><h4>Sell</h4><p>Collateral is sold for the debt asset, sized from the balance actually received.</p></div>
-          <div class="step"><div class="node">05</div><h4>Repay</h4><p>The flash loan is repaid and a minimum profit is enforced on-chain.</p></div>
+          <div class="step"><div class="node">01</div><h4>Detect</h4><p>Positions are monitored continuously, and every opportunity is simulated before it is acted on.</p></div>
+          <div class="step"><div class="node">02</div><h4>Borrow</h4><p>Capital is sourced for the length of the transaction — and only for that.</p></div>
+          <div class="step"><div class="node">03</div><h4>Liquidate</h4><p>The unhealthy position is closed on the protocol.</p></div>
+          <div class="step"><div class="node">04</div><h4>Sell</h4><p>Collateral is converted with best execution.</p></div>
+          <div class="step"><div class="node">05</div><h4>Repay</h4><p>Everything is settled before the block closes, with safeguards enforced on-chain.</p></div>
         </div>
         <div class="outcome">
           <div class="out ok"><b>Settles</b><span>Debt repaid, protocol healthier, loan closed — in the same block.</span></div>
@@ -264,21 +260,23 @@
     </div>
   </section>
 
-  <section id="contracts" class="panel">
+  <section id="partners" class="panel">
     <div class="wrap">
       <div class="sec-head sr">
-        <div class="sec-tag">03 — Contracts</div>
-        <h2>On mainnet. <em>Don't trust us — verify.</em></h2>
+        <div class="sec-tag">03 — Partners</div>
+        <h2>Live on mainnet. <em>Verifiable on request.</em></h2>
       </div>
-      <div class="contracts sr">
-        <a class="contract" href="https://etherscan.io/address/0xF76ec682dd8271788755117e83A1F681b84a43be" target="_blank" rel="noopener">
-          <span class="name">Liquidator<small>Single-position liquidation and settlement</small></span>
-          <span class="addr">0xF76ec682dd8271788755117e83A1F681b84a43be</span><span class="arrow" aria-hidden="true">↗</span>
-        </a>
-        <a class="contract" href="https://etherscan.io/address/0x911b4d96779511ff47e2c1c2aa1c77085683e2e6" target="_blank" rel="noopener">
-          <span class="name">Batch liquidator<small>Several positions in one transaction</small></span>
-          <span class="addr">0x911b4d96779511ff47e2c1c2aa1c77085683e2e6</span><span class="arrow" aria-hidden="true">↗</span>
-        </a>
+      <div class="caps sr" style="grid-template-columns:1fr 1fr">
+        <article class="cap">
+          <span class="cap-k">FOR MARKET MAKERS</span>
+          <h3>Consistent, informed flow</h3>
+          <p>We are an execution-focused counterparty operating our own contracts on Ethereum mainnet. Contract addresses and on-chain history are shared directly with partners.</p>
+        </article>
+        <article class="cap">
+          <span class="cap-k">FOR PROTOCOLS &amp; VENUES</span>
+          <h3>Healthier markets</h3>
+          <p>Fast, clean liquidations are what keep lending markets solvent. If you run a venue or a protocol, we would like to talk.</p>
+        </article>
       </div>
     </div>
   </section>
